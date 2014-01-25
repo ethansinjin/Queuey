@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 EJ Dev. All rights reserved.
 //
 
-#import "EJCollectionViewController.h"
+#import "EJMainViewController.h"
 
-@interface EJCollectionViewController ()
+@interface EJMainViewController ()
 
 @end
 
-@implementation EJCollectionViewController
+@implementation EJMainViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

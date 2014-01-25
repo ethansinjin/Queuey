@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EJCollectionViewController : UICollectionViewController
+@interface EJMainViewController : UICollectionViewController
 
 @end
