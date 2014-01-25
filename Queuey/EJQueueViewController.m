@@ -50,9 +50,6 @@ NSString * const kActionCellIdentifier = @"actionCell";
     
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
-    
-
-
 }
 
 -(NSMutableDictionary*)queueDictionary{
