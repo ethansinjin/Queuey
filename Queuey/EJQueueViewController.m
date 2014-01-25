@@ -7,7 +7,6 @@
 //
 
 #import "EJQueueViewController.h"
-#import <libactivator/libactivator.h>
 #import "EJActionViewController.h"
 
 // NSDictionary Keys
