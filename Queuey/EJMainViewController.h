@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EJMainViewController : UICollectionViewController
+@interface EJMainViewController : UITableViewController
 
 @end

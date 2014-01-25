@@ -8,11 +8,17 @@
 
 #import "EJQueueViewController.h"
 
+// NSDictionary Keys
+NSString * const kQueueNameKey = @"name";
+NSString * const kQueueActionsKey = @"queue";
+
 @interface EJQueueViewController ()
 
 @end
 
 @implementation EJQueueViewController
+
+@synthesize queueDictionary = _queueDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,12 +33,40 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.doneButton.target = self;
+    self.doneButton.action = @selector(donePress);
+    
+    self.cancelButton.target = self;
+    self.cancelButton.action = @selector(cancelPress);
+}
+
+-(NSMutableDictionary*)queueDictionary{
+    if (!_queueDictionary) {
+        _queueDictionary = [NSMutableDictionary dictionary];
+        [_queueDictionary setObject:@"New Queue" forKey:kQueueNameKey];
+        [_queueDictionary setObject:[NSMutableArray array] forKey:kQueueActionsKey];
+    }
+    return _queueDictionary;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)donePress{
+    [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)cancelPress{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)setQueueDictionary:(NSMutableDictionary *)queueDictionary{
+    _queueDictionary = queueDictionary.mutableCopy;
 }
 
 @end

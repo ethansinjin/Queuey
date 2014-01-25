@@ -13,7 +13,7 @@
                         <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="G8l-yQ-Pm8" kind="relationship" relationship="rootViewController" id="Efy-JK-Hgu"/>
+                        <segue destination="wsg-ut-BpY" kind="relationship" relationship="rootViewController" id="g4t-7J-kpA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cA8-ce-Y2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -21,61 +21,50 @@
             <point key="canvasLocation" x="-154" y="64"/>
         </scene>
         <!--Main View Controller - Queuey-->
-        <scene sceneID="dJV-on-iZ9">
+        <scene sceneID="T1T-jX-Vgw">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="G8l-yQ-Pm8" customClass="EJMainViewController" sceneMemberID="viewController">
-                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="JJr-df-toT">
+                <tableViewController id="wsg-ut-BpY" customClass="EJMainViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Fjm-tD-PAx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ulD-OJ-Y2J">
-                            <size key="itemSize" width="319" height="111"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="queueCell" id="U0g-aj-D8M">
-                                <rect key="frame" x="1" y="64" width="319" height="111"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="queueCell" textLabel="msh-W7-9QU" style="IBUITableViewCellStyleDefault" id="doV-wN-uAi">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="319" height="111"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="doV-wN-uAi" id="yIz-sB-Xwa">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="110" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2n6-6s-2Wi">
-                                            <rect key="frame" x="0.0" y="0.0" width="319" height="49"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="msh-W7-9QU">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="2n6-6s-2Wi" firstAttribute="top" secondItem="U0g-aj-D8M" secondAttribute="top" id="0I3-bl-agj"/>
-                                    <constraint firstItem="2n6-6s-2Wi" firstAttribute="leading" secondItem="U0g-aj-D8M" secondAttribute="leading" id="STv-qv-ue7"/>
-                                    <constraint firstAttribute="trailing" secondItem="2n6-6s-2Wi" secondAttribute="trailing" id="ccG-Qx-u5U"/>
-                                    <constraint firstAttribute="centerX" secondItem="2n6-6s-2Wi" secondAttribute="centerX" id="i1E-xI-BAa"/>
-                                    <constraint firstAttribute="centerY" secondItem="2n6-6s-2Wi" secondAttribute="centerY" constant="31" id="rGH-cC-xzS"/>
-                                </constraints>
-                            </collectionViewCell>
-                        </cells>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="34j-9e-Iho" kind="modal" identifier="editSegue" trigger="accessoryAction" id="16N-po-aPu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="G8l-yQ-Pm8" id="I1E-YX-UyF"/>
-                            <outlet property="delegate" destination="G8l-yQ-Pm8" id="qkl-0V-8Zz"/>
+                            <outlet property="dataSource" destination="wsg-ut-BpY" id="6BF-0K-zc1"/>
+                            <outlet property="delegate" destination="wsg-ut-BpY" id="5DR-Io-xUX"/>
                         </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" title="Queuey" id="N32-pl-aT6">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="dH3-zR-7X2"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gN3-8r-hq8">
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Queuey" id="O4r-yS-gjj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="nIf-iV-W60"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="NKj-xe-0ku">
                             <connections>
-                                <segue destination="34j-9e-Iho" kind="modal" id="A9U-Ja-wCZ"/>
+                                <segue destination="34j-9e-Iho" kind="modal" identifier="createSegue" id="K7Y-U7-vtR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fGH-gm-COd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fSb-2o-md6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="300" y="64"/>
         </scene>
@@ -126,8 +115,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="vWI-xL-AWq">
-                        <barButtonItem key="rightBarButtonItem" title="Insert Action" id="hPR-59-fpb"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="dL0-yQ-rmB"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="g26-4m-7Jd"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cancelButton" destination="dL0-yQ-rmB" id="GRp-AG-zer"/>
+                        <outlet property="doneButton" destination="g26-4m-7Jd" id="LDD-4I-kIs"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iA8-EY-7tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -139,4 +133,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="16N-po-aPu"/>
+    </inferredMetricsTieBreakers>
 </document>
