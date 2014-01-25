@@ -12,6 +12,8 @@
 @interface EJMainViewController () <EJQueueViewControllerDelegate>
 
 @property (nonatomic) NSMutableArray *queueList;
+@property (nonatomic) NSString *settingsPath;
+
 @property (nonatomic) UIBarButtonItem *addButtonStorage;
 
 @end
@@ -43,7 +45,18 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     self.editButton.target = self;
     self.editButton.action = @selector(toggleEditing);
     
-    self.queueList = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Queues" ofType:@"plist"]];
+    self.settingsPath = [NSString stringWithFormat:@"%@/Library/Preferences/%@", NSHomeDirectory(), @"com.ejdev.queuey.plist"];
+    self.queueList = [NSMutableArray arrayWithContentsOfFile:
+                     self.settingsPath];
+	
+    //NSMutableDictionary *item1Dict = [self.queueList objectAtIndex:0];
+    
+    
+    if(self.queueList == nil){
+        self.queueList = [[NSMutableArray alloc] init];
+        [self.queueList writeToFile:self.settingsPath atomically:YES];
+        
+    }
 }
 
 -(void)toggleEditing{
@@ -114,6 +127,8 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.queueList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        //added (writes the deletion)
+        [self.queueList writeToFile:self.settingsPath atomically:YES];
     }
 }
 
@@ -136,6 +151,9 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     // New queue
     [self.queueList addObject:queue];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queueList.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    
+    //update the plist file
+    [self.queueList writeToFile:self.settingsPath atomically:YES];
 }
 
 @end

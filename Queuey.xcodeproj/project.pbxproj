@@ -17,7 +17,6 @@
 		AFD4D308189399A3009133A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD4D307189399A3009133A7 /* Images.xcassets */; };
 		D72C658C1893D79900AF2738 /* EJQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658B1893D79900AF2738 /* EJQueueViewController.m */; };
 		D72C658F1893D83200AF2738 /* EJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658E1893D83200AF2738 /* EJMainViewController.m */; };
-		D766D1971893B42B00273630 /* Queues.plist in Resources */ = {isa = PBXBuildFile; fileRef = D766D1961893B42B00273630 /* Queues.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +37,6 @@
 		D72C658B1893D79900AF2738 /* EJQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJQueueViewController.m; sourceTree = "<group>"; };
 		D72C658D1893D83200AF2738 /* EJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJMainViewController.h; sourceTree = "<group>"; };
 		D72C658E1893D83200AF2738 /* EJMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJMainViewController.m; sourceTree = "<group>"; };
-		D766D1961893B42B00273630 /* Queues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Queues.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +124,6 @@
 		AFD4D2F6189399A3009133A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D766D1961893B42B00273630 /* Queues.plist */,
 				AFD4D2F7189399A3009133A7 /* Queuey-Info.plist */,
 				AFD4D2F8189399A3009133A7 /* InfoPlist.strings */,
 				AFD4D2FB189399A3009133A7 /* main.m */,
@@ -191,7 +188,6 @@
 			files = (
 				AFD4D308189399A3009133A7 /* Images.xcassets in Resources */,
 				AFD4D2FA189399A3009133A7 /* InfoPlist.strings in Resources */,
-				D766D1971893B42B00273630 /* Queues.plist in Resources */,
 				AF837F5B1893DB3400C33680 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
