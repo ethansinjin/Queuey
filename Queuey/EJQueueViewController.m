@@ -116,6 +116,10 @@ NSString * const kActionCellIdentifier = @"actionCell";
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
     
+    if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+        cell.textLabel.text = (NSString*)[self.queue objectAtIndex:indexPath.row];
+    }
+    
     return cell;
 }
 
