@@ -52,7 +52,11 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="Queuey" id="N32-pl-aT6">
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="dH3-zR-7X2"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gN3-8r-hq8"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gN3-8r-hq8">
+                            <connections>
+                                <segue destination="34j-9e-Iho" kind="modal" id="A9U-Ja-wCZ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="gN3-8r-hq8" id="NMl-ge-K2e"/>
@@ -61,6 +65,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGH-gm-COd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="300" y="64"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IvT-B5-GFa">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="34j-9e-Iho" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iez-Pb-NPL">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="SC2-76-RZ3" kind="relationship" relationship="rootViewController" id="2wU-YZ-STL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f4L-jH-BJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="763"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="vBO-sT-nCK">
+            <objects>
+                <viewController id="SC2-76-RZ3" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TGB-AY-kZz"/>
+                        <viewControllerLayoutGuide type="bottom" id="eol-MQ-Ikl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="X59-tO-jg6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="L5F-ks-usQ"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V9a-Iz-UfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="300" y="763"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
