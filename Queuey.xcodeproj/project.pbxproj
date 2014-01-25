@@ -16,6 +16,7 @@
 		AFD4D2FC189399A3009133A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD4D2FB189399A3009133A7 /* main.m */; };
 		AFD4D300189399A3009133A7 /* EJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD4D2FF189399A3009133A7 /* EJAppDelegate.m */; };
 		AFD4D308189399A3009133A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD4D307189399A3009133A7 /* Images.xcassets */; };
+		D72851DB1894656C00EBB09C /* EJActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72851DA1894656C00EBB09C /* EJActionViewController.m */; };
 		D72C658C1893D79900AF2738 /* EJQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658B1893D79900AF2738 /* EJQueueViewController.m */; };
 		D72C658F1893D83200AF2738 /* EJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658E1893D83200AF2738 /* EJMainViewController.m */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,8 @@
 		AFD4D2FE189399A3009133A7 /* EJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EJAppDelegate.h; sourceTree = "<group>"; };
 		AFD4D2FF189399A3009133A7 /* EJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EJAppDelegate.m; sourceTree = "<group>"; };
 		AFD4D307189399A3009133A7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D72851D91894656C00EBB09C /* EJActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJActionViewController.h; sourceTree = "<group>"; };
+		D72851DA1894656C00EBB09C /* EJActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJActionViewController.m; sourceTree = "<group>"; };
 		D72C658A1893D79900AF2738 /* EJQueueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJQueueViewController.h; sourceTree = "<group>"; };
 		D72C658B1893D79900AF2738 /* EJQueueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJQueueViewController.m; sourceTree = "<group>"; };
 		D72C658D1893D83200AF2738 /* EJMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJMainViewController.h; sourceTree = "<group>"; };
@@ -117,6 +120,8 @@
 				D72C658E1893D83200AF2738 /* EJMainViewController.m */,
 				D72C658A1893D79900AF2738 /* EJQueueViewController.h */,
 				D72C658B1893D79900AF2738 /* EJQueueViewController.m */,
+				D72851D91894656C00EBB09C /* EJActionViewController.h */,
+				D72851DA1894656C00EBB09C /* EJActionViewController.m */,
 				AFD4D307189399A3009133A7 /* Images.xcassets */,
 				AF837F5A1893DB3400C33680 /* Main.storyboard */,
 				AF06E40418939C89006D26B2 /* Package */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72C658C1893D79900AF2738 /* EJQueueViewController.m in Sources */,
+				D72851DB1894656C00EBB09C /* EJActionViewController.m in Sources */,
 				AFD4D2FC189399A3009133A7 /* main.m in Sources */,
 				AFD4D300189399A3009133A7 /* EJAppDelegate.m in Sources */,
 				D72C658F1893D83200AF2738 /* EJMainViewController.m in Sources */,
