@@ -146,7 +146,7 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     [self.queueList removeObjectAtIndex:sourceIndexPath.row];
     [self.queueList insertObject:obj atIndex:destinationIndexPath.row];
     
-    //added (writes the deletion)
+    //added (writes the move)
     [self.queueList writeToFile:self.settingsPath atomically:YES];
 }
 

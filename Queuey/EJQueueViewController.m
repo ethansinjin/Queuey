@@ -15,11 +15,17 @@ NSString * const kQueueUUIDKey = @"identifier";
 
 @interface EJQueueViewController ()
 
+@property (nonatomic, readonly) NSMutableArray *queue;
+
 @end
 
 @implementation EJQueueViewController
 
 @synthesize queueDictionary = _queueDictionary;
+
+-(NSMutableArray*)queue{
+    return [self.queueDictionary objectForKey:kQueueActionsKey];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -69,6 +75,30 @@ NSString * const kQueueUUIDKey = @"identifier";
 
 -(void)setQueueDictionary:(NSMutableDictionary *)queueDictionary{
     _queueDictionary = queueDictionary.mutableCopy;
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.queue removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    NSObject *obj = [self.queue objectAtIndex:sourceIndexPath.row];
+    [self.queue removeObjectAtIndex:sourceIndexPath.row];
+    [self.queue insertObject:obj atIndex:destinationIndexPath.row];
+    
 }
 
 @end
