@@ -46,17 +46,20 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     self.editButton.action = @selector(toggleEditing);
     
     self.settingsPath = [NSString stringWithFormat:@"%@/Library/Preferences/%@", NSHomeDirectory(), @"com.ejdev.queuey.plist"];
-    self.queueList = [NSMutableArray arrayWithContentsOfFile:
-                     self.settingsPath];
-	
-    //NSMutableDictionary *item1Dict = [self.queueList objectAtIndex:0];
-    
-    
-    if(self.queueList == nil){
-        self.queueList = [[NSMutableArray alloc] init];
-        [self.queueList writeToFile:self.settingsPath atomically:YES];
-        
+	   
+}
+
+-(NSMutableArray*)queueList{
+    if (!_queueList) {
+        self.queueList = [NSMutableArray arrayWithContentsOfFile: self.settingsPath];
+
+        // File didn't exist, create it
+        if (!_queueList) {
+            self.queueList = [[NSMutableArray alloc] init];
+            [self.queueList writeToFile:self.settingsPath atomically:YES];
+        }
     }
+    return _queueList;
 }
 
 -(void)toggleEditing{
@@ -127,6 +130,7 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.queueList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
         //added (writes the deletion)
         [self.queueList writeToFile:self.settingsPath atomically:YES];
     }
