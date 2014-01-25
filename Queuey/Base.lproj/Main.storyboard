@@ -58,9 +58,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="addButton" destination="gN3-8r-hq8" id="NMl-ge-K2e"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGH-gm-COd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
