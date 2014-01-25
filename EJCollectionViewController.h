@@ -1,5 +1,5 @@
 //
-//  EJViewController.h
+//  EJCollectionViewController.h
 //  Queuey
 //
 //  Created by Ethan Gill on 1/24/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EJViewController : UIViewController
+@interface EJCollectionViewController : UICollectionViewController
 
 @end
