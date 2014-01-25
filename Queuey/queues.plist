@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Queue</key>
-	<array>
-		<string>com.nickf.nownow</string>
-		<string>com.gillius.huehuehueon</string>
-		<integer>30000</integer>
-		<string>com.rpetrich.next</string>
-		<dict>
-			<key>condition</key>
-			<string>(BOOL) something</string>
-			<key>true</key>
-			<string>com.rpetrich.mute</string>
-			<key>false</key>
-			<string>com.rpetrich.respring</string>
-		</dict>
-	</array>
-</dict>
+<array>
+	<dict>
+		<key>name</key>
+		<string>Test Queue</string>
+		<key>queue</key>
+		<array>
+			<string>com.nickf.nownow</string>
+			<string>com.gillius.huehuehueon</string>
+			<integer>30000</integer>
+			<string>com.rpetrich.next</string>
+			<dict>
+				<key>condition</key>
+				<string>(BOOL) something</string>
+				<key>true</key>
+				<string>com.rpetrich.mute</string>
+				<key>false</key>
+				<string>com.rpetrich.respring</string>
+			</dict>
+		</array>
+	</dict>
+</array>
 </plist>

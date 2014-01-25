@@ -9,10 +9,19 @@
 #import "EJMainViewController.h"
 
 @interface EJMainViewController ()
-@property NSMutableDictionary *queueList;
+
+@property NSMutableArray *queueList;
+
 @end
 
-NSString * const kQueueCell = @"queueCell";
+//Reusable Cell Identifier
+NSString * const kQueueCellIdentifier = @"queueCell";
+
+//UIView Tags
+NSInteger const kQueueTitleTag = 110;
+
+//NSDictionary Keys
+NSString * const kQueueNameKey = @"name";
 
 @implementation EJMainViewController
 
@@ -30,7 +39,7 @@ NSString * const kQueueCell = @"queueCell";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    self.queueList = [NSMutableDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Queues" ofType:@"plist"]];
+    self.queueList = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Queues" ofType:@"plist"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +57,11 @@ NSString * const kQueueCell = @"queueCell";
 }
 
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQueueCell forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQueueCellIdentifier forIndexPath:indexPath];
+    NSDictionary *queueDictionary = [self.queueList objectAtIndex:indexPath.row];
+    
+    UILabel *title = (UILabel*)[cell viewWithTag:kQueueTitleTag];
+    title.text = [queueDictionary objectForKey:kQueueNameKey];
     
     return cell;
 }
