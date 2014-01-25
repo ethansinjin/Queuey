@@ -9,8 +9,10 @@
 #import "EJMainViewController.h"
 
 @interface EJMainViewController ()
-
+@property NSMutableDictionary *queueList;
 @end
+
+NSString * const kQueueCell = @"queueCell";
 
 @implementation EJMainViewController
 
@@ -28,6 +30,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.queueList = [NSMutableDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Queues" ofType:@"plist"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,8 +39,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)addPress{
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.queueList.count;
+}
+
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQueueCell forIndexPath:indexPath];
     
+    return cell;
 }
 
 @end
