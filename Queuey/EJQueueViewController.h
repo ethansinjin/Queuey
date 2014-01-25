@@ -19,7 +19,7 @@ extern NSString * const kQueueUUIDKey;
 
 @end
 
-@interface EJQueueViewController : UICollectionViewController
+@interface EJQueueViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;

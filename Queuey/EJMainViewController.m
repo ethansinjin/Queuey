@@ -136,6 +136,20 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    NSObject *obj = [self.queueList objectAtIndex:sourceIndexPath.row];
+    [self.queueList removeObjectAtIndex:sourceIndexPath.row];
+    [self.queueList insertObject:obj atIndex:destinationIndexPath.row];
+    
+    //added (writes the deletion)
+    [self.queueList writeToFile:self.settingsPath atomically:YES];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:kEditSegueIdentifier sender:self];
 }
