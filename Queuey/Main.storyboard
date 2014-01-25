@@ -127,7 +127,11 @@
                                     <barButtonItem width="10" style="plain" systemItem="fixedSpace" id="kTE-YB-Kaf"/>
                                     <barButtonItem title="Delay" id="1R9-5W-Yuy"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qKq-0y-I8g"/>
-                                    <barButtonItem title="Action" id="Dom-25-ybm"/>
+                                    <barButtonItem title="Action" id="Dom-25-ybm">
+                                        <connections>
+                                            <segue destination="tWO-RN-l0o" kind="modal" modalTransitionStyle="partialCurl" id="EJs-Bz-UKg"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
@@ -170,6 +174,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oZK-Us-A4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="300" y="763"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VB9-eL-752">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="tWO-RN-l0o" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="tdu-kK-7Uw">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="K6x-4t-tqj" kind="relationship" relationship="rootViewController" id="ncv-Lg-o2l"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S55-YB-ImD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-154" y="1455"/>
+        </scene>
+        <!--Action View Controller - Actions-->
+        <scene sceneID="fAG-oe-ixt">
+            <objects>
+                <tableViewController id="K6x-4t-tqj" customClass="EJActionViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jYb-b9-Edf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wfX-eu-tyA">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wfX-eu-tyA" id="pP0-Dy-dm7">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="K6x-4t-tqj" id="LhR-MH-6Rr"/>
+                            <outlet property="delegate" destination="K6x-4t-tqj" id="EON-1y-eg1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Actions" id="A4k-tu-0S8">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3Rd-67-ru3"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="Mj8-CB-YTc"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZJ-4o-ELn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="300" y="1455"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
