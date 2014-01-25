@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF06E40818939C89006D26B2 /* control in Resources */ = {isa = PBXBuildFile; fileRef = AF06E40718939C89006D26B2 /* control */; };
 		AFD4D2F0189399A3009133A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2EF189399A3009133A7 /* Foundation.framework */; };
 		AFD4D2F2189399A3009133A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F1189399A3009133A7 /* CoreGraphics.framework */; };
 		AFD4D2F4189399A3009133A7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F3189399A3009133A7 /* UIKit.framework */; };
 		AFD4D2FA189399A3009133A7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD4D2F8189399A3009133A7 /* InfoPlist.strings */; };
 		AFD4D2FC189399A3009133A7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD4D2FB189399A3009133A7 /* main.m */; };
 		AFD4D300189399A3009133A7 /* EJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFD4D2FF189399A3009133A7 /* EJAppDelegate.m */; };
-		AFD4D303189399A3009133A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFD4D301189399A3009133A7 /* Main.storyboard */; };
 		AFD4D308189399A3009133A7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFD4D307189399A3009133A7 /* Images.xcassets */; };
 		D72C658C1893D79900AF2738 /* EJQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658B1893D79900AF2738 /* EJQueueViewController.m */; };
 		D72C658F1893D83200AF2738 /* EJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658E1893D83200AF2738 /* EJMainViewController.m */; };
@@ -194,9 +192,7 @@
 			files = (
 				AFD4D308189399A3009133A7 /* Images.xcassets in Resources */,
 				AFD4D2FA189399A3009133A7 /* InfoPlist.strings in Resources */,
-				AFD4D303189399A3009133A7 /* Main.storyboard in Resources */,
 				D766D1971893B42B00273630 /* Queues.plist in Resources */,
-				AF06E40818939C89006D26B2 /* control in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +335,7 @@
 				WRAPPER_EXTENSION = app;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = 169.254.162.190;
+				iOSOpenDevDevice = localhost;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevRespringOnInstall = YES;
@@ -360,7 +356,7 @@
 				WRAPPER_EXTENSION = app;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = 169.254.162.190;
+				iOSOpenDevDevice = localhost;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevRespringOnInstall = YES;
