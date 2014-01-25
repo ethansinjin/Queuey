@@ -45,6 +45,9 @@ NSString * const kActionCellIdentifier = @"actionCell";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.doneButton.target = self;
     self.doneButton.action = @selector(donePress);
     
@@ -69,6 +72,7 @@ NSString * const kActionCellIdentifier = @"actionCell";
 }
 
 -(void)donePress{
+    if (self.nameField.text && ![self.nameField.text isEqualToString:@""]) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
     [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -121,6 +125,34 @@ NSString * const kActionCellIdentifier = @"actionCell";
     }
     
     return cell;
+}
+
+-(void)keyboardWillShow:(NSNotification*)notification{
+    [self animateBottomConstraintWithKeyboard:notification.userInfo keyboardWillShow:YES];
+}
+
+-(void)keyboardWillHide:(NSNotification*)notification{
+    [self animateBottomConstraintWithKeyboard:notification.userInfo keyboardWillShow:NO];
+}
+
+-(void)animateBottomConstraintWithKeyboard:(NSDictionary*)keyboardDictionary keyboardWillShow:(BOOL)show{
+    CGRect keyboardFrame = [[keyboardDictionary objectForKey:UIKeyboardFrameEndUserInfoKey]CGRectValue];
+    CGFloat duration = [[keyboardDictionary objectForKey:UIKeyboardAnimationDurationUserInfoKey]floatValue];
+    
+    UIViewAnimationCurve curve;
+    [[keyboardDictionary valueForKey:UIKeyboardAnimationCurveUserInfoKey] getValue:&curve];
+    UIViewAnimationOptions curveOption = curve << 16; // converts to animation option
+    
+    
+    [UIView animateWithDuration:duration delay:0 options:curveOption animations:^{
+        self.bottomConstraint.constant = show ? keyboardFrame.size.height : 0;
+        [self.view layoutIfNeeded];
+    } completion:nil];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end
