@@ -21,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		AF06E40718939C89006D26B2 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
+		AF7324E51893F4AA00FA1191 /* libactivator.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libactivator.dylib; path = ../../../../../opt/iOSOpenDev/lib/libactivator.dylib; sourceTree = "<group>"; };
 		AF837F5A1893DB3400C33680 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AFD4D2EC189399A3009133A7 /* Queuey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Queuey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFD4D2EF189399A3009133A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +98,7 @@
 		AFD4D2EE189399A3009133A7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AF7324E51893F4AA00FA1191 /* libactivator.dylib */,
 				AFD4D2EF189399A3009133A7 /* Foundation.framework */,
 				AFD4D2F1189399A3009133A7 /* CoreGraphics.framework */,
 				AFD4D2F3189399A3009133A7 /* UIKit.framework */,
