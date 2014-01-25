@@ -11,6 +11,7 @@
 // NSDictionary Keys
 NSString * const kQueueNameKey = @"name";
 NSString * const kQueueActionsKey = @"queue";
+NSString * const kQueueUUIDKey = @"identifier";
 
 @interface EJQueueViewController ()
 
@@ -46,6 +47,7 @@ NSString * const kQueueActionsKey = @"queue";
         _queueDictionary = [NSMutableDictionary dictionary];
         [_queueDictionary setObject:@"New Queue" forKey:kQueueNameKey];
         [_queueDictionary setObject:[NSMutableArray array] forKey:kQueueActionsKey];
+        [_queueDictionary setObject:[[NSUUID UUID] UUIDString] forKey:kQueueUUIDKey];
     }
     return _queueDictionary;
 }

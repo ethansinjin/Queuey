@@ -11,6 +11,7 @@
 // NSDictionary Keys
 extern NSString * const kQueueNameKey;
 extern NSString * const kQueueActionsKey;
+extern NSString * const kQueueUUIDKey;
 
 @protocol EJQueueViewControllerDelegate <NSObject>
 

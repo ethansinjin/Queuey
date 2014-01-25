@@ -11,7 +11,8 @@
 
 @interface EJMainViewController () <EJQueueViewControllerDelegate>
 
-@property NSMutableArray *queueList;
+@property (nonatomic) NSMutableArray *queueList;
+@property (nonatomic) UIBarButtonItem *addButtonStorage;
 
 @end
 
@@ -38,7 +39,30 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.editButton.target = self;
+    self.editButton.action = @selector(toggleEditing);
+    
     self.queueList = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Queues" ofType:@"plist"]];
+}
+
+-(void)toggleEditing{
+    if (self.tableView.editing) {
+        [self.navBar setRightBarButtonItem:self.addButtonStorage animated:YES];
+        self.addButtonStorage = nil;
+        
+        self.editButton.title = @"Edit";
+        self.editButton.style = UIBarButtonItemStylePlain;
+        [self.tableView setEditing:NO animated:YES];
+    }
+    else{
+        self.addButtonStorage = self.navBar.rightBarButtonItem;
+        self.navBar.rightBarButtonItem = nil;
+        
+        self.editButton.title = @"Done";
+        self.editButton.style = UIBarButtonItemStyleDone;
+        [self.tableView setEditing:YES animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +89,8 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    self.tableView.editing = NO;
+    
     BOOL editSegue = [segue.identifier isEqualToString:kEditSegueIdentifier];
     BOOL createSegue = [segue.identifier isEqualToString:kCreateSegueIdentifier];
     
@@ -80,11 +106,34 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     }
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.queueList removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:kEditSegueIdentifier sender:self];
 }
 
 -(void)queueViewControllerWillDismissWithQueue:(NSDictionary *)queue{
+    for (int i = 0; i < self.queueList.count; i++) {
+        
+        NSDictionary *aQueue = [self.queueList objectAtIndex:i];
+        if ([aQueue[kQueueUUIDKey] isEqualToString: queue[kQueueUUIDKey]]){
+            
+            // Same queue, replace it
+            [self.queueList replaceObjectAtIndex:i withObject:queue];
+            return;
+        }
+    }
+    
+    // New queue
     [self.queueList addObject:queue];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queueList.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
 }

@@ -56,13 +56,17 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Queuey" id="O4r-yS-gjj">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="nIf-iV-W60"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="nIf-iV-W60"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="NKj-xe-0ku">
                             <connections>
                                 <segue destination="34j-9e-Iho" kind="modal" identifier="createSegue" id="K7Y-U7-vtR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="editButton" destination="nIf-iV-W60" id="mzb-BN-w4D"/>
+                        <outlet property="navBar" destination="O4r-yS-gjj" id="Nho-OD-xWS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSb-2o-md6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -134,6 +138,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="16N-po-aPu"/>
+        <segue reference="K7Y-U7-vtR"/>
     </inferredMetricsTieBreakers>
 </document>

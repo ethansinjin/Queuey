@@ -10,4 +10,7 @@
 
 @interface EJMainViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+
 @end
