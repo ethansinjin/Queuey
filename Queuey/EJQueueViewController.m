@@ -53,6 +53,12 @@ NSString * const kActionCellIdentifier = @"actionCell";
     
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
+    
+    [self setTextFieldPlaceholder];
+}
+
+-(void)setTextFieldPlaceholder{
+    self.nameField.attributedPlaceholder = [[NSAttributedString alloc]initWithString:self.nameField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:.9 alpha:.5]}];
 }
 
 -(NSMutableDictionary*)queueDictionary{
