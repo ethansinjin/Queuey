@@ -28,9 +28,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    self.addButton.target = self;
-    self.addButton.action = @selector(addPress);
 }
 
 - (void)didReceiveMemoryWarning
