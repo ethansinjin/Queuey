@@ -37,10 +37,7 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
     
-    self.addButton.target = self;
-    self.addButton.action = @selector(addPress);
-    
-    self.events = [[LAActivator sharedInstance] availableEventNames];
+    self.events = [[[LAActivator sharedInstance] availableListenerNames] sortedArrayUsingSelector:@selector(compare:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,8 +50,8 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)addPress{
-    [self.delegate actionViewControllerWillDismissWithAction:@"Test"];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.delegate actionViewControllerWillDismissWithAction:[self.tableView cellForRowAtIndexPath:indexPath].textLabel.text];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -64,11 +61,11 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.events.count;
-}
+};
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
-    cell.textLabel.text = [self.events objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
     return cell;
 }
 
