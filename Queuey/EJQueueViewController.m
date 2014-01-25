@@ -49,11 +49,20 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    
     self.doneButton.target = self;
     self.doneButton.action = @selector(donePress);
     
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
+    
+    [self setTextFieldPlaceholder];
+}
+
+-(void)setTextFieldPlaceholder{
+    self.nameField.attributedPlaceholder = [[NSAttributedString alloc]initWithString:self.nameField.placeholder attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:.9 alpha:.5]}];
 }
 
 -(NSMutableDictionary*)queueDictionary{
@@ -73,6 +82,7 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 }
 
 -(void)donePress{
+    if (self.nameField.text && ![self.nameField.text isEqualToString:@""]) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
     [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -120,10 +130,13 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
     
+    if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+        cell.textLabel.text = (NSString*)[self.queue objectAtIndex:indexPath.row];
+    }
+    
     return cell;
 }
 
-<<<<<<< HEAD
 -(void)keyboardWillShow:(NSNotification*)notification{
     [self animateBottomConstraintWithKeyboard:notification.userInfo keyboardWillShow:YES];
 }
@@ -170,6 +183,4 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-=======
->>>>>>> dae3f96e1b79774423f3b91592471c6e68c7bf01
 @end

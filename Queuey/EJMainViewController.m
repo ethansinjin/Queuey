@@ -15,6 +15,7 @@
 @property (nonatomic) NSString *settingsPath;
 
 @property (nonatomic) UIBarButtonItem *addButtonStorage;
+@property (nonatomic) UIBarButtonItem *editButtonStorage;
 
 @end
 
@@ -42,11 +43,20 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.editButton.target = self;
-    self.editButton.action = @selector(toggleEditing);
+    self.navBar.leftBarButtonItem.target = self;
+    self.navBar.leftBarButtonItem.action = @selector(toggleEditing);
+    
+    self.addButtonStorage = self.navBar.rightBarButtonItem;
+    self.editButtonStorage = self.navBar.leftBarButtonItem;
     
     self.settingsPath = [NSString stringWithFormat:@"%@/Library/Preferences/%@", NSHomeDirectory(), @"com.ejdev.queuey.plist"];
+    
+    [self refreshEditButtonVisibility];
 	   
+}
+
+-(void)toggleEditing{
+    [self toggleEditingToState:!self.editing];
 }
 
 -(NSMutableArray*)queueList{
@@ -62,23 +72,24 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     return _queueList;
 }
 
--(void)toggleEditing{
-    if (self.tableView.editing) {
-        [self.navBar setRightBarButtonItem:self.addButtonStorage animated:YES];
-        self.addButtonStorage = nil;
+-(void)toggleEditingToState:(BOOL)editing{
+    if (editing) {
         
-        self.editButton.title = @"Edit";
-        self.editButton.style = UIBarButtonItemStylePlain;
-        [self.tableView setEditing:NO animated:YES];
-    }
-    else{
-        self.addButtonStorage = self.navBar.rightBarButtonItem;
         self.navBar.rightBarButtonItem = nil;
         
-        self.editButton.title = @"Done";
-        self.editButton.style = UIBarButtonItemStyleDone;
+        self.editButtonStorage.title = @"Done";
+        self.editButtonStorage.style = UIBarButtonItemStyleDone;
         [self.tableView setEditing:YES animated:YES];
+    
     }
+    else{
+        [self.navBar setRightBarButtonItem:self.addButtonStorage animated:YES];
+        
+        self.editButtonStorage.title = @"Edit";
+        self.editButtonStorage.style = UIBarButtonItemStylePlain;
+        [self.tableView setEditing:NO animated:YES];
+    }
+    self.editing = editing;
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +142,11 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
         [self.queueList removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
+        [self refreshEditButtonVisibility];
+        if (self.queueList.count < 1) {
+            [self toggleEditingToState:NO];
+        }
+        
         //added (writes the deletion)
         [self.queueList writeToFile:self.settingsPath atomically:YES];
     }
@@ -170,8 +186,19 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     [self.queueList addObject:queue];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queueList.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
     
+    [self refreshEditButtonVisibility];
+    
     //update the plist file
     [self.queueList writeToFile:self.settingsPath atomically:YES];
+}
+
+-(void)refreshEditButtonVisibility{
+    if (self.queueList.count) {
+        self.navBar.leftBarButtonItem = self.editButtonStorage;
+    }
+    else{
+        self.navBar.leftBarButtonItem = nil;
+    }
 }
 
 @end

@@ -29,17 +29,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="queueCell" textLabel="msh-W7-9QU" style="IBUITableViewCellStyleDefault" id="doV-wN-uAi">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="queueCell" textLabel="KyL-SX-fsB" style="IBUITableViewCellStyleDefault" id="doV-wN-uAi">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="doV-wN-uAi" id="yIz-sB-Xwa">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="msh-W7-9QU">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KyL-SX-fsB">
                                             <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -64,7 +64,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editButton" destination="nIf-iV-W60" id="mzb-BN-w4D"/>
                         <outlet property="navBar" destination="O4r-yS-gjj" id="Nho-OD-xWS"/>
                     </connections>
                 </tableViewController>
@@ -76,12 +75,12 @@
         <scene sceneID="IvT-B5-GFa">
             <objects>
                 <navigationController definesPresentationContext="YES" id="34j-9e-Iho" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iez-Pb-NPL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="Iez-Pb-NPL">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.25098040699958801" green="0.0" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Qr1-4X-4by" kind="relationship" relationship="rootViewController" id="eT8-Kh-ts6"/>
+                        <segue destination="Unh-e4-Msy" kind="relationship" relationship="rootViewController" id="olP-Ka-Z6K"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f4L-jH-BJE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,9 +88,8 @@
             <point key="canvasLocation" x="-154" y="763"/>
         </scene>
         <!--Queue View Controller-->
-        <scene sceneID="0rX-2d-G8b">
+        <scene sceneID="SQD-mp-eOa">
             <objects>
-<<<<<<< HEAD
                 <viewController id="Unh-e4-Msy" customClass="EJQueueViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="A91-5J-os0"/>
@@ -198,45 +196,36 @@
             <objects>
                 <tableViewController id="K6x-4t-tqj" customClass="EJActionViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jYb-b9-Edf">
-=======
-                <tableViewController id="Qr1-4X-4by" customClass="EJQueueViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="m2H-uO-44E">
->>>>>>> dae3f96e1b79774423f3b91592471c6e68c7bf01
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionCell" id="M1g-Yq-S8E">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wfX-eu-tyA">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M1g-Yq-S8E" id="vzT-As-QgK">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wfX-eu-tyA" id="pP0-Dy-dm7">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Qr1-4X-4by" id="w4k-WG-6i3"/>
-                            <outlet property="delegate" destination="Qr1-4X-4by" id="Lje-7s-7VN"/>
+                            <outlet property="dataSource" destination="K6x-4t-tqj" id="LhR-MH-6Rr"/>
+                            <outlet property="delegate" destination="K6x-4t-tqj" id="EON-1y-eg1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="hNc-Ct-cL0">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="JYk-5j-X1m"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="Yy4-fJ-vZ5"/>
+                    <navigationItem key="navigationItem" title="Actions" id="A4k-tu-0S8">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3Rd-67-ru3"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="Mj8-CB-YTc"/>
                     </navigationItem>
                     <connections>
-<<<<<<< HEAD
                         <outlet property="addButton" destination="Mj8-CB-YTc" id="eTi-oO-CeW"/>
                         <outlet property="cancelButton" destination="3Rd-67-ru3" id="GGU-tT-iOl"/>
-=======
-                        <outlet property="cancelButton" destination="JYk-5j-X1m" id="Ky5-DI-DYU"/>
-                        <outlet property="doneButton" destination="Yy4-fJ-vZ5" id="3WI-JO-1Te"/>
->>>>>>> dae3f96e1b79774423f3b91592471c6e68c7bf01
                     </connections>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bKD-rN-zzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MZJ-4o-ELn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="300" y="763"/>
+            <point key="canvasLocation" x="300" y="1455"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -245,6 +234,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="K7Y-U7-vtR"/>
+        <segue reference="16N-po-aPu"/>
     </inferredMetricsTieBreakers>
 </document>
