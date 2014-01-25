@@ -8,6 +8,7 @@
 
 #import "EJQueueViewController.h"
 #import <libactivator/libactivator.h>
+#import "EJActionViewController.h"
 
 // NSDictionary Keys
 NSString * const kQueueNameKey = @"name";
@@ -17,7 +18,10 @@ NSString * const kQueueUUIDKey = @"identifier";
 // Reusable Cell Identifier
 NSString * const kActionCellIdentifier = @"actionCell";
 
-@interface EJQueueViewController ()
+// Segue Identifier
+NSString * const kActionSegueIdentifier = @"actionSegue";
+
+@interface EJQueueViewController () <EJActionViewControllerDelegate>
 
 @property (nonatomic, readonly) NSMutableArray *queue;
 
@@ -148,7 +152,6 @@ NSString * const kActionCellIdentifier = @"actionCell";
     return NO;
 }
 
-<<<<<<< HEAD
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 //    self.tableView.editing = NO;
     
@@ -169,6 +172,4 @@ NSString * const kActionCellIdentifier = @"actionCell";
 
 =======
 >>>>>>> dae3f96e1b79774423f3b91592471c6e68c7bf01
-=======
->>>>>>> parent of 82cd100... Hacky ass version
 @end

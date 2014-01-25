@@ -131,7 +131,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="qKq-0y-I8g"/>
                                     <barButtonItem title="Action" id="Dom-25-ybm">
                                         <connections>
-                                            <segue destination="tWO-RN-l0o" kind="modal" modalTransitionStyle="partialCurl" id="EJs-Bz-UKg"/>
+                                            <segue destination="tWO-RN-l0o" kind="modal" identifier="actionSegue" id="EJs-Bz-UKg"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -139,7 +139,7 @@
                                 <color key="barTintColor" red="0.098039217293262482" green="0.098039217293262482" blue="0.098039217293262482" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Uh-mt-0Hy" firstAttribute="bottom" secondItem="rHZ-hz-IGd" secondAttribute="top" id="9hq-eP-8RR"/>
                             <constraint firstItem="rHZ-hz-IGd" firstAttribute="leading" secondItem="SpG-Qv-DMK" secondAttribute="leading" id="EkI-mK-G34"/>
@@ -224,7 +224,6 @@
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="JYk-5j-X1m"/>
                         <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="Yy4-fJ-vZ5"/>
                     </navigationItem>
-<<<<<<< HEAD
                     <connections>
 <<<<<<< HEAD
                         <outlet property="addButton" destination="Mj8-CB-YTc" id="eTi-oO-CeW"/>
@@ -234,8 +233,6 @@
                         <outlet property="doneButton" destination="Yy4-fJ-vZ5" id="3WI-JO-1Te"/>
 >>>>>>> dae3f96e1b79774423f3b91592471c6e68c7bf01
                     </connections>
-=======
->>>>>>> parent of 82cd100... Hacky ass version
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bKD-rN-zzI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
