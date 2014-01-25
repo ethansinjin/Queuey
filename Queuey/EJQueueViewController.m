@@ -7,11 +7,15 @@
 //
 
 #import "EJQueueViewController.h"
+#import <libactivator/libactivator.h>
 
 // NSDictionary Keys
 NSString * const kQueueNameKey = @"name";
 NSString * const kQueueActionsKey = @"queue";
 NSString * const kQueueUUIDKey = @"identifier";
+
+// Reusable Cell Identifier
+NSString * const kActionCellIdentifier = @"actionCell";
 
 @interface EJQueueViewController ()
 
@@ -99,6 +103,20 @@ NSString * const kQueueUUIDKey = @"identifier";
     [self.queue removeObjectAtIndex:sourceIndexPath.row];
     [self.queue insertObject:obj atIndex:destinationIndexPath.row];
     
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.queue.count;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
+    
+    return cell;
 }
 
 @end
