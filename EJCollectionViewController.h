@@ -10,4 +10,6 @@
 
 @interface EJCollectionViewController : UICollectionViewController
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
 @end
