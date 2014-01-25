@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EJActionViewControllerDelegate <NSObject>
+
+-(void)actionViewControllerWillDismissWithAction:(NSString*)action;
+
+@end
+
 @interface EJActionViewController : UITableViewController
+
+@property (weak, nonatomic) id<EJActionViewControllerDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end

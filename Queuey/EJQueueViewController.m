@@ -8,6 +8,7 @@
 
 #import "EJQueueViewController.h"
 #import <libactivator/libactivator.h>
+#import "EJActionViewController.h"
 
 // NSDictionary Keys
 NSString * const kQueueNameKey = @"name";
@@ -17,7 +18,10 @@ NSString * const kQueueUUIDKey = @"identifier";
 // Reusable Cell Identifier
 NSString * const kActionCellIdentifier = @"actionCell";
 
-@interface EJQueueViewController ()
+// Segue Identifier
+NSString * const kActionSegueIdentifier = @"actionSegue";
+
+@interface EJQueueViewController () <EJActionViewControllerDelegate>
 
 @property (nonatomic, readonly) NSMutableArray *queue;
 
@@ -159,6 +163,24 @@ NSString * const kActionCellIdentifier = @"actionCell";
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return NO;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+//    self.tableView.editing = NO;
+    
+    BOOL actionSegue = [segue.identifier isEqualToString:kActionSegueIdentifier];
+    
+    if (actionSegue) {
+        if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+            EJActionViewController *controller = (EJActionViewController*)[segue.destinationViewController topViewController];
+            controller.delegate = self;
+        }
+    }
+}
+
+-(void)actionViewControllerWillDismissWithAction:(NSString*)action{
+    [self.queue addObject:action];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

@@ -27,6 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    self.cancelButton.target = self;
+    self.cancelButton.action = @selector(cancelPress);
+    
+    self.addButton.target = self;
+    self.addButton.action = @selector(addPress);
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,5 +40,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)cancelPress{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)addPress{
+    [self.delegate actionViewControllerWillDismissWithAction:@"Test"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 @end
