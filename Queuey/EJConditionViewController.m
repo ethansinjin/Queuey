@@ -14,6 +14,7 @@ NSString * const kConditionAdderCellIdentifier = @"conditionAdderCell";
 @interface EJConditionViewController ()
 
 @property (nonatomic) NSDictionary *conditions;
+@property (nonatomic) NSArray *searchResults;
 
 @property (nonatomic) NSArray *conditionIdentifiers;
 
@@ -64,6 +65,8 @@ NSString * const kConditionAdderCellIdentifier = @"conditionAdderCell";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark UITableViewDelegate Methods
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.delegate conditionViewControllerWillDismissWithCondition:[self.conditionIdentifiers objectAtIndex:indexPath.row]];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -74,16 +77,57 @@ NSString * const kConditionAdderCellIdentifier = @"conditionAdderCell";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.conditions.count;
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.searchResults count];
+        
+    } else {
+        return self.conditions.count;
+        
+    }
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kConditionAdderCellIdentifier];
     
-    NSString *key = self.conditionIdentifiers[indexPath.row];
-    cell.textLabel.text = self.conditions[key];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kConditionAdderCellIdentifier];
+    }
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        cell.textLabel.text = [self.searchResults objectAtIndex:indexPath.row];
+    } else {
+        NSString *key = self.conditionIdentifiers[indexPath.row];
+        cell.textLabel.text = self.conditions[key];
+    }
     
     return cell;
+    
+    
+    
+}
+
+#pragma mark Search Methods
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"SELF contains[cd] %@",
+                                    searchText];
+    
+    self.searchResults = [self.conditionIdentifiers filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
 }
 
 @end
