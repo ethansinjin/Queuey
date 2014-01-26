@@ -22,15 +22,16 @@ extern NSString * const kQueueUUIDKey;
 @interface EJQueueViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @property (weak, nonatomic) id<EJQueueViewControllerDelegate> delegate;
 
 @property (nonatomic) NSMutableDictionary *queueDictionary;
 
+@property (weak, nonatomic) IBOutlet UINavigationItem *navBar;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 
 @end

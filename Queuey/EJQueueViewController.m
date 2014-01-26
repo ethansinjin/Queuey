@@ -27,6 +27,8 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 @interface EJQueueViewController () <EJActionViewControllerDelegate>
 
 @property (nonatomic, readonly) NSMutableArray *queue;
+@property (nonatomic) UIBarButtonItem *editButtonStorage;
+@property (nonatomic) UIBarButtonItem *saveButtonStorage;
 
 @end
 
@@ -56,18 +58,25 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
         self.nameField.text = self.queueDictionary[kQueueNameKey];
     }
     
-    self.tableView.editing = YES;
+    self.editButtonStorage = self.navBar.leftBarButtonItem;
+    self.saveButtonStorage = self.navBar.rightBarButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    self.saveButton.target = self;
-    self.saveButton.action = @selector(savePress);
+    self.navBar.leftBarButtonItem.target = self;
+    self.navBar.leftBarButtonItem.action = @selector(toggleEditing);
     
-    self.cancelButton.target = self;
-    self.cancelButton.action = @selector(cancelPress);
+    self.navBar.rightBarButtonItem.target = self;
+    self.navBar.rightBarButtonItem.action = @selector(savePress);
+    
+    //self.cancelButton.target = self;
+    //self.cancelButton.action = @selector(cancelPress);
     
     [self setTextFieldPlaceholder];
+    
+    [self refreshForCountChange];
+
     
 }
 
@@ -121,6 +130,8 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.queue removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self refreshForCountChange];
+
     }
 }
 
@@ -161,6 +172,7 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification{
+    [self toggleEditingToState:NO];
     [self animateBottomConstraintWithKeyboard:notification.userInfo keyboardWillShow:YES];
 }
 
@@ -204,6 +216,56 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 -(void)actionViewControllerWillDismissWithAction:(NSString*)action{
     [self.queue addObject:action];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self refreshForCountChange];
+    
+    if (self.queue.count < 1) {
+        [self toggleEditingToState:NO];
+    }
+
 }
+
+-(void)refreshForCountChange{
+    if (self.queue.count) {
+        self.navBar.leftBarButtonItem = self.editButtonStorage;
+        self.navBar.rightBarButtonItem.title = @"Save";
+    }
+    else{
+        self.navBar.leftBarButtonItem = nil;
+        self.navBar.rightBarButtonItem.title = @"Cancel";
+    }
+}
+
+
+-(void)toggleEditing{
+    [self toggleEditingToState:!self.editing];
+}
+
+-(void)toggleEditingToState:(BOOL)editing{
+    
+    UIViewAnimationOptions animationOptions = editing ? UIViewAnimationOptionCurveEaseIn : UIViewAnimationOptionCurveEaseOut;
+    [UIView animateWithDuration:.2 delay:0 options:animationOptions animations:^{
+        self.bottomConstraint.constant = editing ? -self.toolbar.frame.size.height : 0;
+        [self.view layoutIfNeeded];
+    } completion:nil];
+    
+    if (editing) {
+        [self.nameField resignFirstResponder];
+        self.navBar.rightBarButtonItem = nil;
+        self.editButtonStorage.title = @"Done";
+        self.editButtonStorage.style = UIBarButtonItemStyleDone;
+        [self.tableView setEditing:YES animated:YES];
+        
+    }
+    else{
+        [self.navBar setRightBarButtonItem:self.saveButtonStorage animated:YES];
+        self.editButtonStorage.title = @"Edit";
+        self.editButtonStorage.style = UIBarButtonItemStylePlain;
+        [self.tableView setEditing:NO animated:YES];
+    }
+    self.editing = editing;
+    
+}
+
 
 @end
