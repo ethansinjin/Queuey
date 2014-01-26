@@ -139,7 +139,16 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        NSString *UUID = [[self.root.queues objectAtIndex:indexPath.row]objectForKey:kQueueUUIDKey];
+        
+        NSString *listener = [self listenerKeyForUUID:UUID];
+        if (listener) {
+            [self.root.listeners removeObjectForKey:listener];
+        }
+        
         [self.root.queues removeObjectAtIndex:indexPath.row];
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self refreshEditButtonVisibility];
@@ -150,6 +159,15 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
         //added (writes the deletion)
         [self.root save];
     }
+}
+
+-(NSString*)listenerKeyForUUID:(NSString*)UUID{
+    for (NSString *key in self.root.listeners) {
+        if ([[self.root.listeners objectForKey:key]isEqualToString:UUID]) {
+            return UUID;
+        }
+    }
+    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
@@ -209,31 +227,35 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     NSDictionary *queue = self.root.queues[indexPath.row];
     NSString *UUID = [queue objectForKey:kQueueUUIDKey];
     NSString *name = [queue objectForKey:kQueueNameKey];
-    
-    NSString *unusedKey = nil;
-    for (NSString *key in self.listenerKeys) {
-        NSString *idForKey = [self.root.listeners objectForKey:key];
-        if ([idForKey isEqualToString:UUID]) {
-            // already in, present
-            [self showListenerSettingsForListenerKey:key title:name];
-            return;
-        }
-        else if(!idForKey && !unusedKey){
-            // not used && we didn't already find an unused one
-            unusedKey = key;
-            // keep looping to ensure that UUID isn't already here
-        }
-    }
-    if (unusedKey) {
-        //found one
-        [self.root.listeners setObject:UUID forKey:unusedKey];
-        [self.root save];
-        
-        [self showListenerSettingsForListenerKey:unusedKey title:name];
 
+    NSString *listener = [self listenerKeyForUUID:UUID];
+    if (listener) {
+        // Already assigned to a listener
+        [self showListenerSettingsForListenerKey:listener title:name];
+        return;
     }
     else{
-        // Didn't find anything, prompt to replace one
+        for (NSString *key in self.listenerKeys) {
+            NSString *keyTaken = [self.root.listeners objectForKey:key];
+            if (!keyTaken) {
+                
+                // Found unused listener; assign us to it
+                [self.root.listeners setObject:UUID forKey:key];
+                [self.root save];
+                [self showListenerSettingsForListenerKey:key title:name];
+                return;
+            }
+        }
+    }
+    
+    NSLog(@"ALL KEYS TAKEN");
+}
+
+-(void)unassignAllEventsForListener:(NSString*)listener{
+    
+    NSArray *events = [[LAActivator sharedInstance] eventsAssignedToListenerWithName:listener];
+    for (LAEvent *event in events){
+        [[LAActivator sharedInstance] unassignEvent:event];
     }
 }
 
