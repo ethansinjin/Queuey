@@ -186,7 +186,13 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
         cell = [tableView dequeueReusableCellWithIdentifier:kDelayCellIdentifier];
         UIStepper *stepper = (UIStepper*)[cell viewWithTag:kStepperViewTag];
         [stepper addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventValueChanged];
-
+        
+        NSNumber *num = [self.queue objectAtIndex:indexPath.row];
+        
+        NSLog(@"NUM IS %i",(int)num.intValue);
+        stepper.value = num.intValue;
+        [self stepperValueChanged:stepper];
+        
         return cell;
     }
     
@@ -194,7 +200,11 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
 }
 
 -(void)stepperValueChanged:(UIStepper*)stepper{
-    
+    UITableViewCell *cell = (UITableViewCell*)stepper.superview.superview.superview;
+    NSIndexPath *path = [self.tableView indexPathForCell:cell];
+    NSString *units = (stepper.value > 1) ? @"seconds" : @"second";
+        
+    [self.queue replaceObjectAtIndex:path.row withObject:[NSNumber numberWithInt:(int)stepper.value]];
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification{
