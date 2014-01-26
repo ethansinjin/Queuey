@@ -58,6 +58,10 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     self.cancelButton.action = @selector(cancelPress);
     
     [self setTextFieldPlaceholder];
+    
+    if ([self.queueDictionary[kQueueNameKey] length]){
+        self.title = self.queueDictionary[kQueueNameKey];
+    }
 }
 
 -(void)setTextFieldPlaceholder{
@@ -81,7 +85,7 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 }
 
 -(void)donePress{
-    if (self.nameField.text && ![self.nameField.text isEqualToString:@""]) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
+    if (self.nameField.text.length) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
     [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
