@@ -18,6 +18,7 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 @interface EJActionViewController ()
 
 @property (nonatomic) NSArray *events;
+@property (nonatomic) NSArray *searchResults;
 
 @end
 
@@ -67,20 +68,56 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.events.count;
+
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.searchResults count];
+    } else {
+        return [self.events count];
+    }
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionAdderCellIdentifier];
     
+    
+    
+    
 #if TARGET_OS_EMBEDDED
-    cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
-    cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+    } else {
+        cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.searchResults objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.searchResults objectAtIndex:indexPath.row]];
+    }
 #else
     cell.textLabel.text = [[self.events objectAtIndex:indexPath.row]uppercaseString];
 #endif
     
     return cell;
 }
+
+#pragma mark Search Methods
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"SELF contains[cd] %@",
+                                    searchText];
+    
+    self.searchResults = [self.events filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
 
 @end
