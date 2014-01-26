@@ -8,6 +8,7 @@
 
 #import "EJQueueViewController.h"
 #import "EJActionViewController.h"
+#import "EJConditionViewController.h"
 
 #if TARGET_OS_EMBEDDED
 #import <libactivator/libactivator.h>
@@ -24,8 +25,12 @@ NSString * const kDelayCellIdentifier = @"delayCell";
 
 // Segue Identifier
 NSString * const kActionSegueIdentifier = @"actionSegue";
+NSString * const kConditionSegueIdentifier = @"conditionSegue";
 
-@interface EJQueueViewController () <EJActionViewControllerDelegate>
+// Conditional Identifiers
+NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacements.endif";
+
+@interface EJQueueViewController () <EJActionViewControllerDelegate, EJConditionViewControllerDelegate>
 
 @property (nonatomic, readonly) NSMutableArray *queue;
 @property (nonatomic) UIBarButtonItem *editButtonStorage;
@@ -213,11 +218,12 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 //    self.tableView.editing = NO;
     
     BOOL actionSegue = [segue.identifier isEqualToString:kActionSegueIdentifier];
+    BOOL conditionSegue = [segue.identifier isEqualToString:kConditionSegueIdentifier];
     
-    if (actionSegue) {
+    if (actionSegue || conditionSegue) {
         if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
-            EJActionViewController *controller = (EJActionViewController*)[segue.destinationViewController topViewController];
-            controller.delegate = self;
+            UITableViewController *controller = (UITableViewController*)[segue.destinationViewController topViewController];
+            [controller performSelector:@selector(setDelegate:) withObject:self];
         }
     }
 }
@@ -232,6 +238,10 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
         [self toggleEditingToState:NO];
     }
 
+}
+
+-(void)conditionViewControllerWillDismissWithCondition:(NSString*)condition{
+    NSLog(@"ADDED CONDITION %@", condition);
 }
 
 -(void)refreshForCountChange{
@@ -276,8 +286,24 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 }
 
 - (IBAction)addDelay:(id)sender {
-    [self.queue addObject:[NSNumber numberWithFloat:NAN]];
+    [self.queue addObject:[NSNumber numberWithInteger:1000]]; //demo code
+//    [self.queue addObject:[NSNumber numberWithFloat:NAN]];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    
+    [self refreshForCountChange];
+    
+    if (self.queue.count < 1) {
+        [self toggleEditingToState:NO];
+    }
+
+}
+
+- (IBAction)addConditional:(id)sender {
+    // Create conditional entry in array on save
+    // by converting if then
+    // when it is time to return
+    NSString *condition;
+    [self.queue addObjectsFromArray:@[condition, kConditionalEndIf]];
 }
 
 @end

@@ -6,22 +6,20 @@
 //  Copyright (c) 2014 EJ Dev. All rights reserved.
 //
 
-#import "EJActionViewController.h"
-
-#if TARGET_OS_EMBEDDED
-#import <libactivator/libactivator.h>
-#endif
+#import "EJConditionViewController.h"
 
 // Reusable Cell Identifier
-NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
+NSString * const kConditionAdderCellIdentifier = @"conditionAdderCell";
 
-@interface EJActionViewController ()
+@interface EJConditionViewController ()
 
-@property (nonatomic) NSArray *events;
+@property (nonatomic) NSDictionary *conditions;
+
+@property (nonatomic) NSArray *conditionIdentifiers;
 
 @end
 
-@implementation EJActionViewController
+@implementation EJConditionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,12 +37,7 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
     
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
-    
-#if TARGET_OS_EMBEDDED
-    self.events = [[[LAActivator sharedInstance] availableListenerNames] sortedArrayUsingSelector:@selector(compare:)];
-#else
-    self.events = @[@"fake1",@"fake2",@"fake3"];
-#endif
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,12 +46,26 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
     // Dispose of any resources that can be recreated.
 }
 
+-(NSDictionary*)conditions{
+    if (!_conditions) {
+        _conditions = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource: @"Conditions" ofType: @"plist"]];
+    }
+    return _conditions;
+}
+
+-(NSArray*)conditionIdentifiers{
+    if (!_conditionIdentifiers) {
+        _conditionIdentifiers = [self.conditions.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    }
+    return _conditionIdentifiers;
+}
+
 -(void)cancelPress{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.delegate actionViewControllerWillDismissWithAction:[self.events objectAtIndex:indexPath.row]];
+    [self.delegate conditionViewControllerWillDismissWithCondition:[self.conditionIdentifiers objectAtIndex:indexPath.row]];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -67,18 +74,14 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.events.count;
+    return self.conditions.count;
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionAdderCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kConditionAdderCellIdentifier];
     
-#if TARGET_OS_EMBEDDED
-    cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
-    cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
-#else
-    cell.textLabel.text = [[self.events objectAtIndex:indexPath.row]uppercaseString];
-#endif
+    NSString *key = self.conditionIdentifiers[indexPath.row];
+    cell.textLabel.text = self.conditions[key];
     
     return cell;
 }

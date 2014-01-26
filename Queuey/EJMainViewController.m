@@ -19,6 +19,7 @@ NSString * const kQueueCellIdentifier = @"queueCell";
 // Segue Identifier
 NSString * const kEditSegueIdentifier = @"editSegue";
 NSString * const kCreateSegueIdentifier = @"createSegue";
+NSString * const kConfigureSegueIdentifier = @"configureSegue";
 
 @interface EJMainViewController () <EJQueueViewControllerDelegate>
 
@@ -192,6 +193,11 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     else{
         self.navBar.leftBarButtonItem = nil;
     }
+}
+
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:kConfigureSegueIdentifier sender:self];
 }
 
 @end
