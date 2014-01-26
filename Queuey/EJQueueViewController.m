@@ -23,6 +23,9 @@ NSString * const kQueueUUIDKey = @"identifier";
 NSString * const kActionCellIdentifier = @"actionCell";
 NSString * const kDelayCellIdentifier = @"delayCell";
 
+// View Tag
+NSInteger const kStepperViewTag = 45;
+
 // Segue Identifier
 NSString * const kActionSegueIdentifier = @"actionSegue";
 NSString * const kConditionSegueIdentifier = @"conditionSegue";
