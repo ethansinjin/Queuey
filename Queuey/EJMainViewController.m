@@ -252,11 +252,14 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 }
 
 -(void)unassignAllEventsForListener:(NSString*)listener{
-    
+#if TARGET_OS_EMBEDDED
+
     NSArray *events = [[LAActivator sharedInstance] eventsAssignedToListenerWithName:listener];
     for (LAEvent *event in events){
         [[LAActivator sharedInstance] unassignEvent:event];
     }
+#endif
+
 }
 
 -(NSArray*)listenerKeys{
