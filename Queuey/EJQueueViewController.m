@@ -171,6 +171,7 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell;
     
+    
     if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
         cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
 
@@ -189,7 +190,6 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
         
         NSNumber *num = [self.queue objectAtIndex:indexPath.row];
         
-        NSLog(@"NUM IS %i",(int)num.intValue);
         stepper.value = num.intValue;
         [self stepperValueChanged:stepper];
         
@@ -203,8 +203,11 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
     UITableViewCell *cell = (UITableViewCell*)stepper.superview.superview.superview;
     NSIndexPath *path = [self.tableView indexPathForCell:cell];
     NSString *units = (stepper.value > 1) ? @"seconds" : @"second";
-        
-    [self.queue replaceObjectAtIndex:path.row withObject:[NSNumber numberWithInt:(int)stepper.value]];
+
+    cell.textLabel.text = [NSString stringWithFormat:@"Wait %i %@",(int)stepper.value, units];
+    if (path) {
+        [self.queue replaceObjectAtIndex:path.row withObject:[NSNumber numberWithInt:(int)stepper.value]];
+    }
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification{
