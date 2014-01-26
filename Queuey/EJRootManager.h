@@ -10,7 +10,7 @@
 
 @interface EJRootManager : NSObject
 
-@property (nonatomic) NSMutableArray *listeners;
+@property (nonatomic) NSMutableDictionary *listeners;
 @property (nonatomic) NSMutableArray *queues;
 
 -(void)save;

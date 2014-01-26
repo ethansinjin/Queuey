@@ -63,24 +63,11 @@
                     <connections>
                         <outlet property="navBar" destination="O4r-yS-gjj" id="Nho-OD-xWS"/>
                         <segue destination="34j-9e-Iho" kind="modal" identifier="editSegue" id="IEA-so-TXL"/>
-                        <segue destination="fQA-Q3-gZS" kind="modal" identifier="configureSegue" id="hrC-bg-8q3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fSb-2o-md6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="300" y="64"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="r40-le-7vB">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="fQA-Q3-gZS" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FBO-Iu-8Xl">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nG2-0o-9QR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-154" y="-668"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IvT-B5-GFa">
@@ -142,7 +129,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Wait 1000 ms" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hTh-nD-ZcF">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Wait 1 second" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hTh-nD-ZcF">
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>

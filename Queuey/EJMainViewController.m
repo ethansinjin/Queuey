@@ -11,7 +11,11 @@
 #import "EJRootManager.h"
 #import "NSMutableArray+Swap.h"
 
-#define NUMBER_OF_LISTENERS 5
+#if TARGET_OS_EMBEDDED
+#import <libactivator/libactivator.h>
+#endif
+
+#define NUMBER_OF_LISTENERS 10
 
 // Reusable Cell Identifier
 NSString * const kQueueCellIdentifier = @"queueCell";
@@ -19,12 +23,12 @@ NSString * const kQueueCellIdentifier = @"queueCell";
 // Segue Identifier
 NSString * const kEditSegueIdentifier = @"editSegue";
 NSString * const kCreateSegueIdentifier = @"createSegue";
-NSString * const kConfigureSegueIdentifier = @"configureSegue";
 
 @interface EJMainViewController () <EJQueueViewControllerDelegate>
 
 // Data
 @property (nonatomic) EJRootManager *root;
+@property (nonatomic, readonly) NSArray *listenerKeys;
 
 // Interface
 @property (nonatomic) UIBarButtonItem *addButtonStorage;
@@ -33,6 +37,8 @@ NSString * const kConfigureSegueIdentifier = @"configureSegue";
 @end
 
 @implementation EJMainViewController
+
+@synthesize listenerKeys = _listenerKeys;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -197,16 +203,59 @@ NSString * const kConfigureSegueIdentifier = @"configureSegue";
 
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    
     //[self performSegueWithIdentifier:kConfigureSegueIdentifier sender:self];
     
-    if (self.root.listeners.count >= NUMBER_OF_LISTENERS) {
-        // prompt replacement of listener
+    NSDictionary *queue = self.root.queues[indexPath.row];
+    NSString *UUID = [queue objectForKey:kQueueUUIDKey];
+    NSString *name = [queue objectForKey:kQueueNameKey];
+    
+    NSString *unusedKey = nil;
+    for (NSString *key in self.listenerKeys) {
+        NSString *idForKey = [self.root.listeners objectForKey:key];
+        if ([idForKey isEqualToString:UUID]) {
+            // already in, present
+            [self showListenerSettingsForListenerKey:key title:name];
+            return;
+        }
+        else if(!idForKey && !unusedKey){
+            // not used && we didn't already find an unused one
+            unusedKey = key;
+            // keep looping to ensure that UUID isn't already here
+        }
+    }
+    if (unusedKey) {
+        //found one
+        [self.root.listeners setObject:UUID forKey:unusedKey];
+        [self.root save];
+        
+        [self showListenerSettingsForListenerKey:unusedKey title:name];
+
     }
     else{
-        
-        // find 1st unused number
-        // pop up controller to add use
+        // Didn't find anything, prompt to replace one
     }
+}
+
+-(NSArray*)listenerKeys{
+    if (!_listenerKeys) {
+        NSMutableArray *mutKeys = [NSMutableArray array];
+        for (int i = 1; i <= NUMBER_OF_LISTENERS; i++) {
+            [mutKeys addObject:[NSString stringWithFormat:@"com.ejdev.Queuey%i",i]];
+        }
+        _listenerKeys = mutKeys.copy;
+    }
+    return _listenerKeys;
+}
+
+-(void)showListenerSettingsForListenerKey:(NSString*)listenerKey title:(NSString*)title{
+#if TARGET_OS_EMBEDDED
+    LAListenerSettingsViewController *listenerController = [[LAListenerSettingsViewController alloc] init];
+    listenerController.listenerName = listenerKey;
+    listenerController.title = title;
+    [self.navigationController pushViewController:listenerController animated:YES];
+#endif
+
 }
 
 @end

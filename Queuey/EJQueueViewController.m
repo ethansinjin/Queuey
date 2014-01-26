@@ -136,8 +136,10 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [self.queue removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
         [self refreshForCountChange];
 
     }
@@ -286,7 +288,7 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
 }
 
 - (IBAction)addDelay:(id)sender {
-    [self.queue addObject:[NSNumber numberWithInteger:1000]]; //demo code
+    [self.queue addObject:[NSNumber numberWithInteger:1]]; //demo code
 //    [self.queue addObject:[NSNumber numberWithFloat:NAN]];
     [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
     

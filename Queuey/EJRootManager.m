@@ -32,11 +32,11 @@ NSInteger const kRootQueuesIdentifier = 1;
     return [NSArray arrayWithContentsOfFile:self.path];
 }
 
--(NSMutableArray*)listeners{
+-(NSMutableDictionary*)listeners{
     if (!_listeners) {
         _listeners = self.root[kRootListenersIdentifier];
         if (!_listeners) {
-            _listeners = [NSMutableArray array];
+            _listeners = [NSMutableDictionary dictionary];
         }
     }
     return _listeners;
