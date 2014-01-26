@@ -75,9 +75,13 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
     
 #if TARGET_OS_EMBEDDED
     cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
+<<<<<<< HEAD
 #else
     cell.textLabel.text = [[self.events objectAtIndex:indexPath.row]uppercaseString];
 #endif
+=======
+    cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+>>>>>>> adc0da70b6dc166aa886ccee53ed0e0777197e6f
     return cell;
 }
 
