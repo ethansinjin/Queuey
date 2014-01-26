@@ -42,6 +42,7 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
     
 #if TARGET_OS_EMBEDDED
     self.events = [[[LAActivator sharedInstance] availableListenerNames] sortedArrayUsingSelector:@selector(compare:)];
+    NSLog(@"%@", self.events);
 #else
     self.events = @[@"fake1",@"fake2",@"fake3"];
 #endif
