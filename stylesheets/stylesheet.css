@@ -157,6 +157,15 @@ p img {
   border: none;
 }
 
+#appicon {
+	border: 0px;
+	box-shadow: 0 0 0px #ebebeb;
+	-webkit-box-shadow: 0 0 0px #ebebeb;
+	-moz-box-shadow: 0 0 0px #ebebeb;
+	-o-box-shadow: 0 0 0px #ebebeb;
+	-ms-box-shadow: 0 0 0px #ebebeb;
+}
+
 pre, code {
   width: 100%;
   color: #222;
