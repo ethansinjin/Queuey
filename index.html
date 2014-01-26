@@ -1,76 +1,107 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Queuey by ethansinjin</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Queuey : Extend Activator by rPetrich with action queues, timers, conditionals, and more!" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Queuey</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Queuey</h1>
-          <h2>Extend Activator by rPetrich with action queues, timers, conditionals, and more!</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ethansinjin/Queuey">View on GitHub</a>
+
+          <h1 id="project_title">Queuey</h1>
+          <h2 id="project_tagline">Extend Activator by rPetrich with action queues, timers, conditionals, and more!</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ethansinjin/Queuey/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ethansinjin/Queuey/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/ethansinjin/Queuey/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/ethansinjin/Queuey/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/ethansinjin/Queuey" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h3>
+<a name="welcome-to-queuey" class="anchor" href="#welcome-to-queuey"><span class="octicon octicon-link"></span></a>Welcome to Queuey.</h3>
 
-        <hr>
-
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Queuey is an application for jailbroken iOS devices that makes your life awesome by extending Ryan Petrich's famous <a href="https://github.com/rpetrich/libactivator/">Activator</a> tweak.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="what-is-activator" class="anchor" href="#what-is-activator"><span class="octicon octicon-link"></span></a>What is Activator?</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Activator, as self described, allows centralized gestures and button management for iOS. Since its debut in 2010, it has garnered a massive following from users in the jailbreak community, due to its power and ease of use.  However, Activator does have its limitations, namely: there is only very basic 'multiple actions' support, there are no timers, and conditional statements are but a dream.</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><strong>Or are they?</strong></p>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="what-is-queuey" class="anchor" href="#what-is-queuey"><span class="octicon octicon-link"></span></a>What is Queuey?</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Queuey extends Activator in all three ways above. Using Queuey, one can set up 'queues', or workflows, that utilize Activator's power and extensibility.  Delays can be freely configured and used to great effect.  In addition, conditional statements (if statements) can be created in a fashionable GUI.</p>
+
+<h3>
+<a name="queue-ideas" class="anchor" href="#queue-ideas"><span class="octicon octicon-link"></span></a>Queue Ideas</h3>
+
+<p>Once Queuey is installed, the possibilities are endless! Since Queuey can interact with any Activator plugins installed, interesting possibilities open up.</p>
+
+<p>One great example of an extension that Queuey can utilize is HueHueHue, by Ethan Gill (<a href="https://github.com/ethansinjin" class="user-mention">@ethansinjin</a>), one of this project's authors. Using HueHueHue, Queuey can toggle the state of Philips Hue lighting systems over local Wi-Fi. This, accompanied by delays and conditionals, can lead to powerful actions. One could tap the home button three times to turn lights off, wait 5 seconds, turn on Airplane Mode, and start playing music!</p>
+
+<h3>
+<a name="about-the-authors" class="anchor" href="#about-the-authors"><span class="octicon octicon-link"></span></a>About the Authors</h3>
+
+<p>This project was completed in under 36 hours by:</p>
+
+<ul>
+<li>Jaden Geller (<a href="https://github.com/JadenGeller" class="user-mention">@JadenGeller</a>)</li>
+<li>Ethan Gill (<a href="https://github.com/ethansinjin" class="user-mention">@ethansinjin</a>)</li>
+</ul><p>Jaden Geller is an awesome person. He currently attends Caltech as a freshman, and is 18 years old.  He attended WWDC 2013 on a student scholarship, and has released several App Store applications. This is his first foray into jailbroken development.</p>
+
+<p>Ethan Gill is a dual-credit earning high school senior and college sophomore who attends The Carol Martin Gatton Academy of Mathematics and Science in Kentucky.  He is 17 years old.  Since attending WWDC on a student scholarship in 2013 (where he met Jaden), he has continuously developed in Objective-C. He has released two Cydia tweaks, HueHueHue and ScreenshotShareSheet.</p>
+
+<h3>
+<a name="the-future-of-queuey" class="anchor" href="#the-future-of-queuey"><span class="octicon octicon-link"></span></a>The Future of Queuey</h3>
+
+<p>Queuey will be released in Cydia for an introductory price of $2.99 for two weeks. After that, it will be $3.99.  Keep your eyes peeled for the future!</p>
 
 <h3>
 <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
+<p>For support, bug reports, or feature requests, please contact <a href="mailto:ethan.gill@me.com">ethan.gill@me.com</a>.</p>
 
-        <footer>
-          Queuey is maintained by <a href="https://github.com/ethansinjin">ethansinjin</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<p>If you would like to help localize Queuey, please contact <a href="mailto:ethan.gill@me.com">ethan.gill@me.com</a></p>
 
-        
-      </div>
+<p>If you're at HackTECH, we're the two sleep-deprived kids in between the Firebase and Pinterest tables.  Feel free to stop by!</p>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Queuey maintained by <a href="https://github.com/ethansinjin">ethansinjin</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-47488320-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
   </body>
 </html>
