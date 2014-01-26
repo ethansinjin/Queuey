@@ -8,16 +8,10 @@
 
 #import "EJMainViewController.h"
 #import "EJQueueViewController.h"
+#import "EJRootManager.h"
+#import "NSMutableArray+Swap.h"
 
-@interface EJMainViewController () <EJQueueViewControllerDelegate>
-
-@property (nonatomic) NSMutableArray *queueList;
-@property (nonatomic) NSString *settingsPath;
-
-@property (nonatomic) UIBarButtonItem *addButtonStorage;
-@property (nonatomic) UIBarButtonItem *editButtonStorage;
-
-@end
+#define NUMBER_OF_LISTENERS 5
 
 // Reusable Cell Identifier
 NSString * const kQueueCellIdentifier = @"queueCell";
@@ -25,6 +19,17 @@ NSString * const kQueueCellIdentifier = @"queueCell";
 // Segue Identifier
 NSString * const kEditSegueIdentifier = @"editSegue";
 NSString * const kCreateSegueIdentifier = @"createSegue";
+
+@interface EJMainViewController () <EJQueueViewControllerDelegate>
+
+// Data
+@property (nonatomic) EJRootManager *root;
+
+// Interface
+@property (nonatomic) UIBarButtonItem *addButtonStorage;
+@property (nonatomic) UIBarButtonItem *editButtonStorage;
+
+@end
 
 @implementation EJMainViewController
 
@@ -49,7 +54,7 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     self.addButtonStorage = self.navBar.rightBarButtonItem;
     self.editButtonStorage = self.navBar.leftBarButtonItem;
     
-    self.settingsPath = [NSString stringWithFormat:@"%@/Library/Preferences/%@", NSHomeDirectory(), @"com.ejdev.queuey.plist"];
+    _root = [[EJRootManager alloc]init];
     
     [self refreshEditButtonVisibility];
 	   
@@ -57,19 +62,6 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 
 -(void)toggleEditing{
     [self toggleEditingToState:!self.editing];
-}
-
--(NSMutableArray*)queueList{
-    if (!_queueList) {
-        self.queueList = [NSMutableArray arrayWithContentsOfFile: self.settingsPath];
-
-        // File didn't exist, create it
-        if (!_queueList) {
-            self.queueList = [[NSMutableArray alloc] init];
-            [self.queueList writeToFile:self.settingsPath atomically:YES];
-        }
-    }
-    return _queueList;
 }
 
 -(void)toggleEditingToState:(BOOL)editing{
@@ -103,14 +95,14 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.queueList.count;
+    return self.root.queues.count;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kQueueCellIdentifier];
-    NSDictionary *queueDictionary = [self.queueList objectAtIndex:indexPath.row];
+    NSDictionary *queueForRow = [self.root.queues objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [queueDictionary objectForKey:kQueueNameKey];
+    cell.textLabel.text = [queueForRow objectForKey:kQueueNameKey];
 
     return cell;
 }
@@ -123,11 +115,12 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     
     if (editSegue || createSegue) {
         if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+            
             EJQueueViewController *controller = (EJQueueViewController*)[segue.destinationViewController topViewController];
             controller.delegate = self;
             
             if (editSegue) {
-                controller.queueDictionary = [self.queueList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+                controller.queueDictionary = self.root.queues[self.tableView.indexPathForSelectedRow.row];
             }
         }
     }
@@ -139,16 +132,16 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.queueList removeObjectAtIndex:indexPath.row];
+        [self.root.queues removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self refreshEditButtonVisibility];
-        if (self.queueList.count < 1) {
+        if (self.root.queues.count < 1) {
             [self toggleEditingToState:NO];
         }
         
         //added (writes the deletion)
-        [self.queueList writeToFile:self.settingsPath atomically:YES];
+        [self.root save];
     }
 }
 
@@ -158,12 +151,8 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 }
 
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
-    NSObject *obj = [self.queueList objectAtIndex:sourceIndexPath.row];
-    [self.queueList removeObjectAtIndex:sourceIndexPath.row];
-    [self.queueList insertObject:obj atIndex:destinationIndexPath.row];
-    
-    //added (writes the move)
-    [self.queueList writeToFile:self.settingsPath atomically:YES];
+    [self.root.queues moveObjectAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+    [self.root save];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -171,30 +160,33 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 }
 
 -(void)queueViewControllerWillDismissWithQueue:(NSDictionary *)queue{
-    for (int i = 0; i < self.queueList.count; i++) {
+    
+    // Check if queue exists and replace it
+    for (int i = 0; i < self.root.queues.count; i++) {
         
-        NSDictionary *aQueue = [self.queueList objectAtIndex:i];
+        NSDictionary *aQueue = [self.root.queues objectAtIndex:i];
         if ([aQueue[kQueueUUIDKey] isEqualToString: queue[kQueueUUIDKey]]){
             
             // Same queue, replace it
-            [self.queueList replaceObjectAtIndex:i withObject:queue];
+            [self.root.queues replaceObjectAtIndex:i withObject:queue];
+            [self.root save];
+
             [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].textLabel.text = queue[kQueueNameKey];
             return;
         }
     }
     
-    // New queue
-    [self.queueList addObject:queue];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.queueList.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+    // Queue doesn't exist; add this new queue
+    [self.root.queues addObject:queue];
+    [self.root save];
+    
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.root.queues.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
     
     [self refreshEditButtonVisibility];
-    
-    //update the plist file
-    [self.queueList writeToFile:self.settingsPath atomically:YES];
 }
 
 -(void)refreshEditButtonVisibility{
-    if (self.queueList.count) {
+    if (self.root.queues.count) {
         self.navBar.leftBarButtonItem = self.editButtonStorage;
     }
     else{
