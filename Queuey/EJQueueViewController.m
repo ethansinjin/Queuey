@@ -20,6 +20,7 @@ NSString * const kQueueUUIDKey = @"identifier";
 
 // Reusable Cell Identifier
 NSString * const kActionCellIdentifier = @"actionCell";
+NSString * const kDelayCellIdentifier = @"delayCell";
 
 // Segue Identifier
 NSString * const kActionSegueIdentifier = @"actionSegue";
@@ -158,9 +159,11 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
+    UITableViewCell *cell;
     
     if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
+
 #if TARGET_OS_EMBEDDED
 
         cell.textLabel.text = [[LAActivator sharedInstance] localizedTitleForListenerName:[self.queue objectAtIndex:indexPath.row]];
@@ -168,6 +171,10 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
 #else
         cell.textLabel.text = [[self.queue objectAtIndex:indexPath.row]capitalizedString];
 #endif
+    }
+    else if([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSNumber class]]){
+        cell = [tableView dequeueReusableCellWithIdentifier:kDelayCellIdentifier];
+        return cell;
     }
     
     return cell;
@@ -238,7 +245,6 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     }
 }
 
-
 -(void)toggleEditing{
     [self toggleEditingToState:!self.editing];
 }
@@ -269,5 +275,9 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     
 }
 
+- (IBAction)addDelay:(id)sender {
+    [self.queue addObject:[NSNumber numberWithFloat:NAN]];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:self.queue.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
 
 @end
