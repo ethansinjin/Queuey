@@ -63,7 +63,7 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     
     [self setTextFieldPlaceholder];
     
-    if ([self.queueDictionary[kQueueNameKey] length]){
+    if (_queueDictionary && [self.queueDictionary[kQueueNameKey] length]){
         self.nameField.text = self.queueDictionary[kQueueNameKey];
     }
 }
@@ -138,7 +138,8 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
     
     if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
-        cell.textLabel.text = (NSString*)[self.queue objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[LAActivator sharedInstance] localizedTitleForListenerName:[self.queue objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:[self.queue objectAtIndex:indexPath.row]];
     }
     
     return cell;
