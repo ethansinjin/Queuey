@@ -158,12 +158,12 @@ p img {
 }
 
 #appicon {
-	border: 0px;
-	box-shadow: 0 0 0px #ebebeb;
-	-webkit-box-shadow: 0 0 0px #ebebeb;
-	-moz-box-shadow: 0 0 0px #ebebeb;
-	-o-box-shadow: 0 0 0px #ebebeb;
-	-ms-box-shadow: 0 0 0px #ebebeb;
+	border: 0px !important;
+	box-shadow: 0 0 0px #ebebeb !important;
+	-webkit-box-shadow: 0 0 0px #ebebeb !important;
+	-moz-box-shadow: 0 0 0px #ebebeb !important;
+	-o-box-shadow: 0 0 0px #ebebeb !important;
+	-ms-box-shadow: 0 0 0px #ebebeb !important;
 }
 
 pre, code {
