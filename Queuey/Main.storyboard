@@ -160,24 +160,25 @@
                     </view>
                     <navigationItem key="navigationItem" id="i3T-D1-oLe">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="hHX-Hy-rdI"/>
+                        <barButtonItem key="leftBarButtonItem" title="Edit" id="hHX-Hy-rdI"/>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap to Name" textAlignment="center" minimumFontSize="17" id="UQo-Ph-8v9">
-                            <rect key="frame" x="68" y="7" width="196" height="30"/>
+                            <rect key="frame" x="62" y="7" width="196" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                            <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done"/>
                             <connections>
                                 <outlet property="delegate" destination="Unh-e4-Msy" id="cdW-9S-2A7"/>
                             </connections>
                         </textField>
-                        <barButtonItem key="rightBarButtonItem" title="Done" style="done" id="Fd9-P9-8wK"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="Fd9-P9-8wK"/>
                     </navigationItem>
                     <connections>
                         <outlet property="bottomConstraint" destination="bom-Qy-Dys" id="c8b-NG-RNJ"/>
                         <outlet property="cancelButton" destination="hHX-Hy-rdI" id="Zei-CG-daS"/>
-                        <outlet property="doneButton" destination="Fd9-P9-8wK" id="MnF-lW-Eti"/>
+                        <outlet property="editButton" destination="hHX-Hy-rdI" id="qvZ-a2-RAE"/>
                         <outlet property="nameField" destination="UQo-Ph-8v9" id="zhn-q1-XzX"/>
+                        <outlet property="saveButton" destination="Fd9-P9-8wK" id="ukP-4S-yLc"/>
                         <outlet property="tableView" destination="1Uh-mt-0Hy" id="JYe-yF-O6T"/>
                     </connections>
                 </viewController>

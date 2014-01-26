@@ -52,22 +52,23 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    if (_queueDictionary && [self.queueDictionary[kQueueNameKey] length]){
+        self.nameField.text = self.queueDictionary[kQueueNameKey];
+    }
+    
     self.tableView.editing = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    self.doneButton.target = self;
-    self.doneButton.action = @selector(donePress);
+    self.saveButton.target = self;
+    self.saveButton.action = @selector(savePress);
     
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
     
     [self setTextFieldPlaceholder];
     
-    if (_queueDictionary && [self.queueDictionary[kQueueNameKey] length]){
-        self.nameField.text = self.queueDictionary[kQueueNameKey];
-    }
 }
 
 -(void)setTextFieldPlaceholder{
@@ -90,10 +91,17 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     // Dispose of any resources that can be recreated.
 }
 
--(void)donePress{
-    if (self.nameField.text.length) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
-    [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
+-(void)savePress{
+    if (self.queue.count) {
+        // Save
+        
+        if (self.nameField.text.length) [self.queueDictionary setObject:self.nameField.text forKey:kQueueNameKey];
+        [self.delegate queueViewControllerWillDismissWithQueue:self.queueDictionary];
+    }
+    // Else cancel
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 -(void)cancelPress{
