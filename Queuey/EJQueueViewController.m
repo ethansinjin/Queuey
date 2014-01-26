@@ -76,6 +76,8 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [self setTextFieldPlaceholder];
     
     [self refreshForCountChange];
+    
+    
 
     
 }
