@@ -11,10 +11,6 @@
 #import "EJRootManager.h"
 #import "NSMutableArray+Swap.h"
 
-#if TARGET_OS_EMBEDDED
-#import <libactivator/libactivator.h>
-#endif
-
 #define NUMBER_OF_LISTENERS 5
 
 // Reusable Cell Identifier
@@ -207,15 +203,10 @@ NSString * const kConfigureSegueIdentifier = @"configureSegue";
         // prompt replacement of listener
     }
     else{
+        
         // find 1st unused number
         // pop up controller to add use
     }
-    
-    LAListenerSettingsViewController *vc = [[LAListenerSettingsViewController alloc] init];
-    vc.listenerName = @"com.ejdev.queueyOne";
-    
-    [myNavigationController pushViewController:vc animated:YES];
-
 }
 
 @end
