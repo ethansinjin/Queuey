@@ -15,4 +15,12 @@
 
 -(void)save;
 
+-(NSInteger)numberOfAvailibleListeners;
+-(BOOL)identifierHasListener:(NSString*)UUID;
+-(NSString*)keyOfAvailibleListener;
+-(BOOL)attachIdentifierToListener:(NSString*)UUID;
+-(void)removeIdentifierFromListener:(NSString*)UUID;
+-(NSArray*)possibleListeners;
+-(NSString*)listenerKeyFromUUID:(NSString*)UUID;
+
 @end

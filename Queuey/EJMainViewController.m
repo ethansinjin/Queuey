@@ -15,8 +15,6 @@
 #import <libactivator/libactivator.h>
 #endif
 
-#define NUMBER_OF_LISTENERS 10
-
 // Reusable Cell Identifier
 NSString * const kQueueCellIdentifier = @"queueCell";
 
@@ -28,7 +26,6 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 
 // Data
 @property (nonatomic) EJRootManager *root;
-@property (nonatomic, readonly) NSArray *listenerKeys;
 
 // Interface
 @property (nonatomic) UIBarButtonItem *addButtonStorage;
@@ -37,8 +34,6 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 @end
 
 @implementation EJMainViewController
-
-@synthesize listenerKeys = _listenerKeys;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -141,14 +136,8 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         NSString *UUID = [[self.root.queues objectAtIndex:indexPath.row]objectForKey:kQueueUUIDKey];
-        
-        NSString *listener = [self listenerKeyForUUID:UUID];
-        if (listener) {
-            [self.root.listeners removeObjectForKey:listener];
-        }
-        
+        [self.root removeIdentifierFromListener:UUID];
         [self.root.queues removeObjectAtIndex:indexPath.row];
-
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         [self refreshEditButtonVisibility];
@@ -156,18 +145,8 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
             [self toggleEditingToState:NO];
         }
         
-        //added (writes the deletion)
         [self.root save];
     }
-}
-
--(NSString*)listenerKeyForUUID:(NSString*)UUID{
-    for (NSString *key in self.root.listeners) {
-        if ([[self.root.listeners objectForKey:key]isEqualToString:UUID]) {
-            return UUID;
-        }
-    }
-    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
@@ -227,50 +206,13 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
     NSDictionary *queue = self.root.queues[indexPath.row];
     NSString *UUID = [queue objectForKey:kQueueUUIDKey];
     NSString *name = [queue objectForKey:kQueueNameKey];
-
-    NSString *listener = [self listenerKeyForUUID:UUID];
-    if (listener) {
-        // Already assigned to a listener
-        [self showListenerSettingsForListenerKey:listener title:name];
-        return;
+    
+    if ([self.root attachIdentifierToListener:UUID]) {
+        [self showListenerSettingsForListenerKey:[self.root listenerKeyFromUUID:UUID] title:name];
     }
     else{
-        for (NSString *key in self.listenerKeys) {
-            NSString *keyTaken = [self.root.listeners objectForKey:key];
-            if (!keyTaken) {
-                
-                // Found unused listener; assign us to it
-                [self.root.listeners setObject:UUID forKey:key];
-                [self.root save];
-                [self showListenerSettingsForListenerKey:key title:name];
-                return;
-            }
-        }
+        [[[UIAlertView alloc]initWithTitle:@"Listener failed to add UUID" message:nil delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
     }
-    
-    NSLog(@"ALL KEYS TAKEN");
-}
-
--(void)unassignAllEventsForListener:(NSString*)listener{
-#if TARGET_OS_EMBEDDED
-
-    NSArray *events = [[LAActivator sharedInstance] eventsAssignedToListenerWithName:listener];
-    for (LAEvent *event in events){
-        [[LAActivator sharedInstance] unassignEvent:event];
-    }
-#endif
-
-}
-
--(NSArray*)listenerKeys{
-    if (!_listenerKeys) {
-        NSMutableArray *mutKeys = [NSMutableArray array];
-        for (int i = 1; i <= NUMBER_OF_LISTENERS; i++) {
-            [mutKeys addObject:[NSString stringWithFormat:@"com.ejdev.Queuey%i",i]];
-        }
-        _listenerKeys = mutKeys.copy;
-    }
-    return _listenerKeys;
 }
 
 -(void)showListenerSettingsForListenerKey:(NSString*)listenerKey title:(NSString*)title{
