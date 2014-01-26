@@ -184,10 +184,17 @@ NSString * const kConditionalEndIf = @"com.ejdev.queuey.conditionals.replacement
     }
     else if([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSNumber class]]){
         cell = [tableView dequeueReusableCellWithIdentifier:kDelayCellIdentifier];
+        UIStepper *stepper = (UIStepper*)[cell viewWithTag:kStepperViewTag];
+        [stepper addTarget:self action:@selector(stepperValueChanged:) forControlEvents:UIControlEventValueChanged];
+
         return cell;
     }
     
     return cell;
+}
+
+-(void)stepperValueChanged:(UIStepper*)stepper{
+    
 }
 
 -(void)keyboardWillShow:(NSNotification*)notification{
