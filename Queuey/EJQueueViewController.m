@@ -9,6 +9,10 @@
 #import "EJQueueViewController.h"
 #import "EJActionViewController.h"
 
+#if TARGET_OS_EMBEDDED
+#import <libactivator/libactivator.h>
+#endif
+
 // NSDictionary Keys
 NSString * const kQueueNameKey = @"name";
 NSString * const kQueueActionsKey = @"queue";
@@ -60,7 +64,7 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [self setTextFieldPlaceholder];
     
     if ([self.queueDictionary[kQueueNameKey] length]){
-        self.title = self.queueDictionary[kQueueNameKey];
+        self.nameField.text = self.queueDictionary[kQueueNameKey];
     }
 }
 

@@ -7,10 +7,13 @@
 //
 
 #import "EJActionViewController.h"
+
+#if TARGET_OS_EMBEDDED
 #import <libactivator/libactivator.h>
+#endif
 
 // Reusable Cell Identifier
-NSString * const kActionCellIdentifier = @"actionAdderCell";
+NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 
 @interface EJActionViewController ()
 
@@ -37,7 +40,11 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
     self.cancelButton.target = self;
     self.cancelButton.action = @selector(cancelPress);
     
+#if TARGET_OS_EMBEDDED
     self.events = [[[LAActivator sharedInstance] availableListenerNames] sortedArrayUsingSelector:@selector(compare:)];
+#else
+    self.events = @[@"fake1",@"fake2",@"fake3"];
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,7 +58,7 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self.delegate actionViewControllerWillDismissWithAction:[self.tableView cellForRowAtIndexPath:indexPath].textLabel.text];
+    [self.delegate actionViewControllerWillDismissWithAction:[self.events objectAtIndex:indexPath.row]];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -64,8 +71,13 @@ NSString * const kActionCellIdentifier = @"actionAdderCell";
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionAdderCellIdentifier];
+    
+#if TARGET_OS_EMBEDDED
     cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
+#else
+    cell.textLabel.text = [[self.events objectAtIndex:indexPath.row]uppercaseString];
+#endif
     return cell;
 }
 

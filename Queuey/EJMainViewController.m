@@ -178,6 +178,7 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
             
             // Same queue, replace it
             [self.queueList replaceObjectAtIndex:i withObject:queue];
+            [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]].textLabel.text = queue[kQueueNameKey];
             return;
         }
     }

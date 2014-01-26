@@ -18,7 +18,7 @@
 		D72851DB1894656C00EBB09C /* EJActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72851DA1894656C00EBB09C /* EJActionViewController.m */; };
 		D72C658C1893D79900AF2738 /* EJQueueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658B1893D79900AF2738 /* EJQueueViewController.m */; };
 		D72C658F1893D83200AF2738 /* EJMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D72C658E1893D83200AF2738 /* EJMainViewController.m */; };
-		D7BE282018946D770035AD75 /* libactivator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7324E51893F4AA00FA1191 /* libactivator.dylib */; };
+		D7BE282018946D770035AD75 /* libactivator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7324E51893F4AA00FA1191 /* libactivator.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
