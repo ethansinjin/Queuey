@@ -52,6 +52,8 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    self.tableView.editing = YES;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
@@ -138,8 +140,13 @@ NSString * const kActionSegueIdentifier = @"actionSegue";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionCellIdentifier];
     
     if ([[self.queue objectAtIndex:indexPath.row] isKindOfClass:[NSString class]]) {
+#if TARGET_OS_EMBEDDED
+
         cell.textLabel.text = [[LAActivator sharedInstance] localizedTitleForListenerName:[self.queue objectAtIndex:indexPath.row]];
         cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:[self.queue objectAtIndex:indexPath.row]];
+#else
+        cell.textLabel.text = [[self.queue objectAtIndex:indexPath.row]capitalizedString];
+#endif
     }
     
     return cell;
