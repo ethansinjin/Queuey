@@ -15,6 +15,7 @@ NSInteger const kRootQueuesIdentifier = 1;
 @interface EJRootManager ()
 
 @property (nonatomic) NSString *path;
+@property (nonatomic, readonly) NSArray *root;
 
 @end
 
@@ -27,16 +28,26 @@ NSInteger const kRootQueuesIdentifier = 1;
     return self;
 }
 
+-(NSArray*)root{
+    return [NSArray arrayWithContentsOfFile:self.path];
+}
+
 -(NSMutableArray*)listeners{
     if (!_listeners) {
-        _listeners = [NSMutableArray array];
+        _listeners = self.root[kRootListenersIdentifier];
+        if (!_listeners) {
+            _listeners = [NSMutableArray array];
+        }
     }
     return _listeners;
 }
 
 -(NSMutableArray*)queues{
     if (!_queues) {
-        _queues = [NSMutableArray array];
+        _queues = self.root[kRootQueuesIdentifier];
+        if (!_queues) {
+            _queues = [NSMutableArray array];
+        }
     }
     return _queues;
 }
