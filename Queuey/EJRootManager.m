@@ -41,7 +41,7 @@ NSInteger const kRootQueuesIdentifier = 1;
 
 -(NSMutableDictionary*)listeners{
     if (!_listeners) {
-        _listeners = self.root[kRootListenersIdentifier];
+        _listeners = [self.root[kRootListenersIdentifier] mutableCopy];
         if (!_listeners) {
             _listeners = [NSMutableDictionary dictionary];
         }
@@ -51,7 +51,7 @@ NSInteger const kRootQueuesIdentifier = 1;
 
 -(NSMutableArray*)queues{
     if (!_queues) {
-        _queues = self.root[kRootQueuesIdentifier];
+        _queues = [self.root[kRootQueuesIdentifier] mutableCopy];
         if (!_queues) {
             _queues = [NSMutableArray array];
         }
@@ -119,7 +119,9 @@ NSInteger const kRootQueuesIdentifier = 1;
 
 -(void)removeIdentifierFromListener:(NSString*)UUID{
     NSString *key = [self listenerKeyFromUUID:UUID];
-    [self.listeners removeObjectForKey:key];
+    if ([self.listeners objectForKey:key]) {
+        [self.listeners removeObjectForKey:key];
+    }
     [self unassignAllEventsForListener:key];
 }
 

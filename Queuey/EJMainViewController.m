@@ -134,12 +134,12 @@ NSString * const kCreateSegueIdentifier = @"createSegue";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
         NSString *UUID = [[self.root.queues objectAtIndex:indexPath.row]objectForKey:kQueueUUIDKey];
         [self.root removeIdentifierFromListener:UUID];
         [self.root.queues removeObjectAtIndex:indexPath.row];
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
+
         [self refreshEditButtonVisibility];
         if (self.root.queues.count < 1) {
             [self toggleEditingToState:NO];
