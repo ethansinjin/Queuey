@@ -167,7 +167,7 @@ p img {
 }
 
 #images_hz {
-	width: 2000px;
+	width: 450px;
 	height: auto;
 	overflow: hidden;
 }
@@ -175,6 +175,17 @@ p img {
 	display: inline;
 	margin: 0 10px;
 	width: 320px;
+}
+
+#images_tw_hz {
+	width: 450px;
+	height: auto;
+	overflow: hidden;
+}
+#images_tw_hz img {
+	display: inline;
+	margin: 0 10px;
+	width: 50px;
 }
 
 
