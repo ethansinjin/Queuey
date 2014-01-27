@@ -166,6 +166,18 @@ p img {
 	-ms-box-shadow: 0 0 0px #ebebeb !important;
 }
 
+#images_hz {
+	width: 2000px;
+	height: auto;
+	overflow: hidden;
+}
+#images_hz img {
+	display: inline;
+	margin: 0 10px;
+	width: 320px;
+}
+
+
 pre, code {
   width: 100%;
   color: #222;
