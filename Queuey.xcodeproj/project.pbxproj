@@ -388,7 +388,7 @@
 				WRAPPER_EXTENSION = app;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = localhost;
+				iOSOpenDevDevice = 172.31.78.52;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevRespringOnInstall = NO;
@@ -415,7 +415,7 @@
 				WRAPPER_EXTENSION = app;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = localhost;
+				iOSOpenDevDevice = 172.31.78.52;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevRespringOnInstall = NO;
