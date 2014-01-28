@@ -70,7 +70,13 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.events.count;
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        return [self.searchResults count];
+    } else {
+        return self.events.count;
+    }
+    
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -85,10 +91,11 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 #if TARGET_OS_EMBEDDED
     
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        cell.textLabel.text = [self.searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.searchResults objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:[self.searchResults objectAtIndex:indexPath.row]];
     } else {
         cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
-        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:[self.events objectAtIndex:indexPath.row]];
     }
     
 #else
