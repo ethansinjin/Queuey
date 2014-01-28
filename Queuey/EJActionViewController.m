@@ -18,6 +18,7 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 @interface EJActionViewController ()
 
 @property (nonatomic) NSArray *events;
+@property (nonatomic) NSArray *searchResults;
 
 @end
 
@@ -57,6 +58,8 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark UITableView methods
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.delegate actionViewControllerWillDismissWithAction:[self.events objectAtIndex:indexPath.row]];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -71,16 +74,51 @@ NSString * const kActionAdderCellIdentifier = @"actionAdderCell";
 };
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kActionAdderCellIdentifier];
     
+    //assertion safety for Search View
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kActionAdderCellIdentifier];
+    }
+    
 #if TARGET_OS_EMBEDDED
-    cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
-    cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+    
+    if (tableView == self.searchDisplayController.searchResultsTableView) {
+        cell.textLabel.text = [self.searchResults objectAtIndex:indexPath.row];
+    } else {
+        cell.textLabel.text = [[LAActivator sharedInstance]localizedTitleForListenerName:[self.events objectAtIndex:indexPath.row]];
+        cell.imageView.image = [[LAActivator sharedInstance] smallIconForListenerName:(NSString *)[self.events objectAtIndex:indexPath.row]];
+    }
+    
 #else
     cell.textLabel.text = [[self.events objectAtIndex:indexPath.row]uppercaseString];
 #endif
     
     return cell;
 }
+
+#pragma mark search methods
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    NSPredicate *resultPredicate = [NSPredicate
+                                    predicateWithFormat:@"SELF contains[cd] %@",
+                                    searchText];
+    
+    self.searchResults = [self.events filteredArrayUsingPredicate:resultPredicate];
+}
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+                               scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+                                      objectAtIndex:[self.searchDisplayController.searchBar
+                                                     selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
 
 @end

@@ -187,8 +187,8 @@
                             <constraint firstItem="1Uh-mt-0Hy" firstAttribute="bottom" secondItem="rHZ-hz-IGd" secondAttribute="top" id="9hq-eP-8RR"/>
                             <constraint firstItem="rHZ-hz-IGd" firstAttribute="leading" secondItem="SpG-Qv-DMK" secondAttribute="leading" id="EkI-mK-G34"/>
                             <constraint firstAttribute="trailing" secondItem="rHZ-hz-IGd" secondAttribute="trailing" id="FrM-4g-voc"/>
+                            <constraint firstAttribute="bottom" secondItem="rHZ-hz-IGd" secondAttribute="bottom" constant="20" symbolic="YES" id="YSK-9f-bJF"/>
                             <constraint firstItem="1Uh-mt-0Hy" firstAttribute="trailing" secondItem="rHZ-hz-IGd" secondAttribute="trailing" id="agT-59-RWZ"/>
-                            <constraint firstItem="O42-kJ-jqG" firstAttribute="top" secondItem="rHZ-hz-IGd" secondAttribute="bottom" constant="-44" id="bom-Qy-Dys"/>
                             <constraint firstItem="1Uh-mt-0Hy" firstAttribute="top" secondItem="SpG-Qv-DMK" secondAttribute="top" id="ju4-9F-jOW"/>
                             <constraint firstItem="1Uh-mt-0Hy" firstAttribute="leading" secondItem="rHZ-hz-IGd" secondAttribute="leading" id="u0r-FN-t6l"/>
                         </constraints>
@@ -210,7 +210,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <connections>
-                        <outlet property="bottomConstraint" destination="bom-Qy-Dys" id="c8b-NG-RNJ"/>
                         <outlet property="nameField" destination="UQo-Ph-8v9" id="zhn-q1-XzX"/>
                         <outlet property="navBar" destination="i3T-D1-oLe" id="zSi-nC-jc4"/>
                         <outlet property="tableView" destination="1Uh-mt-0Hy" id="JYe-yF-O6T"/>
@@ -245,9 +244,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" id="ewN-Mr-4Nj">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="K6x-4t-tqj" id="Kne-vw-icP"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionAdderCell" textLabel="djE-1v-8fD" style="IBUITableViewCellStyleDefault" id="wfX-eu-tyA">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wfX-eu-tyA" id="pP0-Dy-dm7">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -276,9 +283,19 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cancelButton" destination="3Rd-67-ru3" id="GGU-tT-iOl"/>
+                        <outlet property="searchDisplayController" destination="ZQp-At-VPW" id="DDM-Fk-8Zw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZJ-4o-ELn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController searchResultsTitle="Conditions" id="ZQp-At-VPW">
+                    <connections>
+                        <outlet property="delegate" destination="K6x-4t-tqj" id="k2k-nA-WNo"/>
+                        <outlet property="searchBar" destination="ewN-Mr-4Nj" id="aFb-rb-CJ9"/>
+                        <outlet property="searchContentsController" destination="K6x-4t-tqj" id="mdT-pN-F5M"/>
+                        <outlet property="searchResultsDataSource" destination="K6x-4t-tqj" id="AzE-ca-F2k"/>
+                        <outlet property="searchResultsDelegate" destination="K6x-4t-tqj" id="W7H-cv-v6U"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1206" y="763"/>
         </scene>
