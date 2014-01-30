@@ -10,6 +10,7 @@
 		AF2075C51899FBC0007140F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2EF189399A3009133A7 /* Foundation.framework */; };
 		AF2075C61899FBC0007140F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F3189399A3009133A7 /* UIKit.framework */; };
 		AF2075CF1899FBC0007140F8 /* QueueyListener.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2075CE1899FBC0007140F8 /* QueueyListener.m */; };
+		AF2075DD1899FDDD007140F8 /* libactivator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7324E51893F4AA00FA1191 /* libactivator.dylib */; };
 		AF837F5B1893DB3400C33680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF837F5A1893DB3400C33680 /* Main.storyboard */; };
 		AFD4D2F0189399A3009133A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2EF189399A3009133A7 /* Foundation.framework */; };
 		AFD4D2F2189399A3009133A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F1189399A3009133A7 /* CoreGraphics.framework */; };
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF2075DD1899FDDD007140F8 /* libactivator.dylib in Frameworks */,
 				AF2075C51899FBC0007140F8 /* Foundation.framework in Frameworks */,
 				AF2075C61899FBC0007140F8 /* UIKit.framework in Frameworks */,
 			);
@@ -430,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -446,13 +449,16 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
-				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/lib/**",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = NO;
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = "";
+				iOSOpenDevDevice = 172.31.78.52;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevPath = /opt/iOSOpenDev;
@@ -465,6 +471,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -477,12 +484,15 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
-				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				LIBRARY_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/lib/**",
+					/opt/iOSOpenDev/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
-				iOSOpenDevDevice = "";
+				iOSOpenDevDevice = 172.31.78.52;
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevPath = /opt/iOSOpenDev;

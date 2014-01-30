@@ -1,6 +1,6 @@
 Package: com.ejdev.QueueyListener
 Name: QueueyListener
-Version: 0.1-1
+Version: 1.0-1
 Description: This should be included in Queuey
 Section: System
 Depends: firmware (>= 5.0), mobilesubstrate, libactivator
