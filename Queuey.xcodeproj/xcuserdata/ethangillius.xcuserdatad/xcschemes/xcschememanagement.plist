@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>QueueyListener.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>AF2075C31899FBC0007140F8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>AF7324AB1893F01F00FA1191</key>
 		<dict>
 			<key>primary</key>

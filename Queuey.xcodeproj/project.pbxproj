@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF2075C51899FBC0007140F8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2EF189399A3009133A7 /* Foundation.framework */; };
+		AF2075C61899FBC0007140F8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F3189399A3009133A7 /* UIKit.framework */; };
+		AF2075CF1899FBC0007140F8 /* QueueyListener.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2075CE1899FBC0007140F8 /* QueueyListener.m */; };
 		AF837F5B1893DB3400C33680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF837F5A1893DB3400C33680 /* Main.storyboard */; };
 		AFD4D2F0189399A3009133A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2EF189399A3009133A7 /* Foundation.framework */; };
 		AFD4D2F2189399A3009133A7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFD4D2F1189399A3009133A7 /* CoreGraphics.framework */; };
@@ -27,6 +30,14 @@
 
 /* Begin PBXFileReference section */
 		AF06E40718939C89006D26B2 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
+		AF2075C41899FBC0007140F8 /* QueueyListener.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = QueueyListener.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF2075CB1899FBC0007140F8 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		AF2075CD1899FBC0007140F8 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		AF2075CE1899FBC0007140F8 /* QueueyListener.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QueueyListener.m; sourceTree = "<group>"; };
+		AF2075D31899FBC0007140F8 /* QueueyListener.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = QueueyListener.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/QueueyListener.plist; sourceTree = "<group>"; };
+		AF2075D71899FBC0007140F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Package/Library/Activator/Listeners/com.ejdev.QueueyListener/Info.plist; sourceTree = "<group>"; };
+		AF2075D81899FBC0007140F8 /* Icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-small.png"; path = "Package/Library/Activator/Listeners/com.ejdev.QueueyListener/Icon-small.png"; sourceTree = "<group>"; };
+		AF2075D91899FBC0007140F8 /* Icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-small@2x.png"; path = "Package/Library/Activator/Listeners/com.ejdev.QueueyListener/Icon-small@2x.png"; sourceTree = "<group>"; };
 		AF7324E51893F4AA00FA1191 /* libactivator.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libactivator.dylib; path = ../../../../../opt/iOSOpenDev/lib/libactivator.dylib; sourceTree = "<group>"; };
 		AF837F5A1893DB3400C33680 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AFD4D2EC189399A3009133A7 /* Queuey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Queuey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +67,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AF2075C01899FBC0007140F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF2075C51899FBC0007140F8 /* Foundation.framework in Frameworks */,
+				AF2075C61899FBC0007140F8 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AFD4D2E9189399A3009133A7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,10 +114,97 @@
 			path = DEBIAN;
 			sourceTree = "<group>";
 		};
+		AF2075C71899FBC0007140F8 /* QueueyListener */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075CE1899FBC0007140F8 /* QueueyListener.m */,
+				AF2075C81899FBC0007140F8 /* Package */,
+				AF2075CC1899FBC0007140F8 /* Supporting Files */,
+			);
+			path = QueueyListener;
+			sourceTree = "<group>";
+		};
+		AF2075C81899FBC0007140F8 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075C91899FBC0007140F8 /* DEBIAN */,
+				AF2075D01899FBC0007140F8 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		AF2075C91899FBC0007140F8 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075CB1899FBC0007140F8 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		AF2075CC1899FBC0007140F8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075CD1899FBC0007140F8 /* PackageVersion.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF2075D01899FBC0007140F8 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D11899FBC0007140F8 /* MobileSubstrate */,
+				AF2075D41899FBC0007140F8 /* Activator */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		AF2075D11899FBC0007140F8 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D21899FBC0007140F8 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		AF2075D21899FBC0007140F8 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D31899FBC0007140F8 /* QueueyListener.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+		AF2075D41899FBC0007140F8 /* Activator */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D51899FBC0007140F8 /* Listeners */,
+			);
+			name = Activator;
+			sourceTree = "<group>";
+		};
+		AF2075D51899FBC0007140F8 /* Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D61899FBC0007140F8 /* ___VARIABLE_bundleIdentifierPrefix:bundleIdentifier___.___VARIABLE_productName:RFC1034Identifier___ */,
+			);
+			name = Listeners;
+			sourceTree = "<group>";
+		};
+		AF2075D61899FBC0007140F8 /* ___VARIABLE_bundleIdentifierPrefix:bundleIdentifier___.___VARIABLE_productName:RFC1034Identifier___ */ = {
+			isa = PBXGroup;
+			children = (
+				AF2075D71899FBC0007140F8 /* Info.plist */,
+				AF2075D81899FBC0007140F8 /* Icon-small.png */,
+				AF2075D91899FBC0007140F8 /* Icon-small@2x.png */,
+			);
+			name = "___VARIABLE_bundleIdentifierPrefix:bundleIdentifier___.___VARIABLE_productName:RFC1034Identifier___";
+			sourceTree = "<group>";
+		};
 		AFD4D2E3189399A3009133A7 = {
 			isa = PBXGroup;
 			children = (
 				AFD4D2F5189399A3009133A7 /* Queuey */,
+				AF2075C71899FBC0007140F8 /* QueueyListener */,
 				AFD4D2EE189399A3009133A7 /* Frameworks */,
 				AFD4D2ED189399A3009133A7 /* Products */,
 			);
@@ -107,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				AFD4D2EC189399A3009133A7 /* Queuey.app */,
+				AF2075C41899FBC0007140F8 /* QueueyListener.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,7 +269,35 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		AF2075C11899FBC0007140F8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		AF2075C31899FBC0007140F8 /* QueueyListener */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF2075DC1899FBC0007140F8 /* Build configuration list for PBXNativeTarget "QueueyListener" */;
+			buildPhases = (
+				AF2075BF1899FBC0007140F8 /* Sources */,
+				AF2075C01899FBC0007140F8 /* Frameworks */,
+				AF2075C11899FBC0007140F8 /* Headers */,
+				AF2075C21899FBC0007140F8 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = QueueyListener;
+			productName = QueueyListener;
+			productReference = AF2075C41899FBC0007140F8 /* QueueyListener.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 		AFD4D2EB189399A3009133A7 /* Queuey */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFD4D31E189399A3009133A7 /* Build configuration list for PBXNativeTarget "Queuey" */;
@@ -204,6 +340,7 @@
 			projectRoot = "";
 			targets = (
 				AFD4D2EB189399A3009133A7 /* Queuey */,
+				AF2075C31899FBC0007140F8 /* QueueyListener */,
 			);
 		};
 /* End PBXProject section */
@@ -236,9 +373,30 @@
 			shellPath = /bin/sh;
 			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
 		};
+		AF2075C21899FBC0007140F8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AF2075BF1899FBC0007140F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF2075CF1899FBC0007140F8 /* QueueyListener.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AFD4D2E8189399A3009133A7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,6 +426,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AF2075DA1899FBC0007140F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		AF2075DB1899FBC0007140F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
 		AFD4D31C189399A3009133A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -426,6 +649,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AF2075DC1899FBC0007140F8 /* Build configuration list for PBXNativeTarget "QueueyListener" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF2075DA1899FBC0007140F8 /* Debug */,
+				AF2075DB1899FBC0007140F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		AFD4D2E7189399A3009133A7 /* Build configuration list for PBXProject "Queuey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
