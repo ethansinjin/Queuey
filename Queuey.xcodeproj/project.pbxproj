@@ -29,6 +29,16 @@
 		D7BE282018946D770035AD75 /* libactivator.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7324E51893F4AA00FA1191 /* libactivator.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		AF2075DE1899FE6B007140F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFD4D2E4189399A3009133A7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AF2075C31899FBC0007140F8;
+			remoteInfo = QueueyListener;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AF06E40718939C89006D26B2 /* control */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
 		AF2075C41899FBC0007140F8 /* QueueyListener.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = QueueyListener.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +322,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AF2075DF1899FE6B007140F8 /* PBXTargetDependency */,
 			);
 			name = Queuey;
 			productName = Queuey;
@@ -416,6 +427,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		AF2075DF1899FE6B007140F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AF2075C31899FBC0007140F8 /* QueueyListener */;
+			targetProxy = AF2075DE1899FE6B007140F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		AFD4D2F8189399A3009133A7 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -462,7 +481,7 @@
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevPath = /opt/iOSOpenDev;
-				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevRespringOnInstall = NO;
 				iOSOpenDevUsePackageVersionPList = YES;
 			};
 			name = Debug;
@@ -496,7 +515,7 @@
 				iOSOpenDevInstallOnAnyBuild = NO;
 				iOSOpenDevInstallOnProfiling = YES;
 				iOSOpenDevPath = /opt/iOSOpenDev;
-				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevRespringOnInstall = NO;
 				iOSOpenDevUsePackageVersionPList = YES;
 			};
 			name = Release;
